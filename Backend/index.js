@@ -1,19 +1,32 @@
-const express = require("express");
-const cors = require("cors");
-const connectDB = require("./config/db");
-require("dotenv").config();
-const axios = require('axios');
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import axios from "axios";
+import connectDB from "./config/db.js";
+import authRoutes from "./routes/auth.js";
+import passport from "passport";
+import session from "express-session";
+import "./auth.js"; // Google OAuth config
+dotenv.config();
+
 
 const PORT = process.env.PORT || 8080;
-const MongoDB = process.env.MONGODB_URL || 8080;
+const MongoDB = process.env.MONGODB_URL;
+const GITHUB_ACCESS_TOKEN = process.env.GITHUB_ACCESS_TOKEN;
+
+const app = express()
 app.use(express.json());
-app = express()
 app.use(cors());
 
+app.use(session({ secret: "your_secret", resave: false, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Routes
+app.use("/auth", authRoutes);
 app.get("/", (_, res) => {
   res.status(200).json({ status: "Server is healthy! Enjoy............" });
 });
-
 
 app.get('/github/:username', async (req, res) => {
   try {
@@ -34,14 +47,14 @@ app.get('/github/:username', async (req, res) => {
           repos: reposResponse.data
       });
   } catch (error) {
-      res.status(500).json({ error: "Error fetching GitHub data" });
+      res.status(500).json({ error: "Error fetching GitHub data", msg: error.message });
   }
 });
 
 
 app.listen(PORT, async () => {
   try {
-    await connectDB(process.env.MONGODB_URL);
+    await connectDB(MongoDB);
     console.log(`Server is running at ${PORT} and database is connected`);
   } catch (error) {
     console.log(`Error: ${error}`);
