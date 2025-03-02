@@ -11,7 +11,7 @@ const GithubLoginButton = () => {
   }, []);
 
   const handleLogin = () => {
-    window.open("/", "_self");
+    window.open("http://localhost:8080/auth/github/callback", "_self");
   };
 
   const handleLogout = () => {
