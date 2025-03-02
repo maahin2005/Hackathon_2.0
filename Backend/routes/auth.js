@@ -4,6 +4,8 @@ import passport from "passport";
 import googleCallback from "../controllers/google/googleCallback.js";
 import githubCallback from "../controllers/github/githubCallback.js";
 const router = express.Router();
+import dotenv from "dotenv";
+dotenv.config();
 
 // Google OAuth Login
 router.get(
@@ -27,7 +29,7 @@ router.get(
 router.get(
   "/github/callback",
   passport.authenticate("github", {
-    failureRedirect: "http://localhost:5173/login",
+    failureRedirect: process.env.FAILED_REDIRECTION,
   }),
   githubCallback
 );
@@ -39,16 +41,21 @@ router.get(
 // });
 
 // Logout
-router.get("/logout", (req, res) => {
+router.get("/logout", (req, res, next) => {
   req.logout((err) => {
     if (err) {
-      return next(err);
+      return next(err); // Properly handle error
     }
+
+    // Destroy the session
     req.session.destroy(() => {
-      res.redirect("http://localhost:5173/login"); // Redirect to homepage or login page
+      // Clear JWT token cookie
+      res.clearCookie("token");
+
+      // Redirect to the login page or home page
+      res.redirect(process.env.FAILED_REDIRECTION);
     });
   });
-  res.clearCookie("token");
 });
 
 // Check if user is logged in
