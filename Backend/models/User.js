@@ -9,6 +9,7 @@ const userSchema = new mongoose.Schema(
     googleId: { type: String, default: null },
     githubId: { type: String, default: null },
     githubUsername: { type: String },
+    topRepos: { type: [{ String }], default: [] },
     score: { type: Number, default: 0 },
     role: {
       type: String,
