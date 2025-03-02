@@ -9,6 +9,9 @@ import RecruiterSection from "../RecruiterSection/RecruiterSection";
 import JobSeekerSection from "../JobSeekerSection/JobSeekerSection";
 import Footer from "../Footer/Footer";
 
+
+
+
 function Home() {
   useEffect(() => {
     AOS.init({ duration: 1000 }); // Initialize AOS with animation duration
@@ -23,6 +26,7 @@ function Home() {
       <JobSeekerSection />
       <RecruiterSection />
       <Footer />
+     
     </>
   );
 }
