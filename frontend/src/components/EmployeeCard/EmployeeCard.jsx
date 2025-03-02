@@ -25,7 +25,7 @@ const EmployeeCard = ({ employee }) => {
 
       {/* Avatar */}
       <img
-        src={employee.avatar}
+        src={employee.profileImage}
         alt="Employee Avatar"
         className="w-20 h-20 mx-auto rounded-full border border-gray-300"
       />
@@ -37,7 +37,7 @@ const EmployeeCard = ({ employee }) => {
       {/* Inner Box */}
       <div className="mt-4 bg-blue-50 p-4 rounded-lg text-left">
         <p className="text-gray-700">
-          <strong>ID:</strong> {employee.id}
+          <strong>GithubID:</strong> {employee.googleId}
         </p>
         <p className="flex items-center text-gray-700 mt-2">
           <FaEnvelope className="mr-2 text-blue-500" /> {employee.email}
@@ -53,8 +53,4 @@ const EmployeeCard = ({ employee }) => {
   );
 };
 
-const App = () => {
-  return <EmployeeCard employee={employee} />;
-};
-
-export default App;
+export default EmployeeCard;

@@ -62,24 +62,9 @@ const RecruiterCard = ({ recruiter }) => {
         </a>
       </div>
         </div>
-           
       </div>
-
-     
-
-     
     </div>
   );
 };
 
-const App2 = () => {
-  return (
-    <div className="flex justify-center items-center h-screen bg-gray-100">
-      <RecruiterCard recruiter={recruiter} />
-    </div>
-  );
-};
-
-export default App2;
-
-
+export default RecruiterCard;
