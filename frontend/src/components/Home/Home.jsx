@@ -8,6 +8,7 @@ import "./Home.css";
 import RecruiterSection from "../RecruiterSection/RecruiterSection";
 import JobSeekerSection from "../JobSeekerSection/JobSeekerSection";
 import Footer from "../Footer/Footer";
+import App from "../EmployeeCard/EmployeeCard";
 
 function Home() {
   useEffect(() => {
@@ -23,6 +24,7 @@ function Home() {
       <JobSeekerSection />
       <RecruiterSection />
       <Footer />
+      <App/>
     </>
   );
 }
