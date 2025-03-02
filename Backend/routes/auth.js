@@ -8,6 +8,9 @@ const router = express.Router();
 // Google OAuth Login
 router.get("/google", passport.authenticate("google", { scope: ["profile", "email"] }));
 
+// GitHub Auth Routes
+router.get("/github", passport.authenticate("github", { scope: ["user:email"] }));
+
 // Callback Route
 router.get("/google/callback",
   passport.authenticate("google", { failureRedirect: "/" }),
@@ -16,6 +19,20 @@ router.get("/google/callback",
     res.redirect(`http://localhost:5173/dashboard?token=${token}`);
   }
 );
+
+router.get(
+  "/github/callback",
+  passport.authenticate("github", { failureRedirect: "http://localhost:5173/login" }),
+  (req, res) => {
+    res.redirect("http://localhost:5173");
+  }
+);
+
+// app.get("/logout", (req, res) => {
+//   req.logout(() => {
+//     res.redirect("http://localhost:3000");
+//   });
+// });
 
 // Logout
 router.get("/logout", (req, res) => {
@@ -27,6 +44,11 @@ router.get("/logout", (req, res) => {
       res.redirect("http://localhost:5173"); // Redirect to homepage or login page
     });
   });
+});
+
+// Check if user is logged in
+router.get("/auth/user", (req, res) => {
+  res.send(req.user || null);
 });
 
 export default router;

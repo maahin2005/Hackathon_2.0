@@ -6,7 +6,8 @@ import connectDB from "./config/db.js";
 import authRoutes from "./routes/auth.js";
 import passport from "passport";
 import session from "express-session";
-import "./auth.js"; // Google OAuth config
+import "./config/googleAuth.js"; // Google OAuth config
+import "./config/githubAuth.js"; // GitHub OAuth config
 dotenv.config();
 
 
@@ -17,6 +18,7 @@ const GITHUB_ACCESS_TOKEN = process.env.GITHUB_ACCESS_TOKEN;
 const app = express()
 app.use(express.json());
 app.use(cors());
+// app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 
 app.use(session({ secret: "your_secret", resave: false, saveUninitialized: true }));
 app.use(passport.initialize());
