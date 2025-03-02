@@ -25,8 +25,6 @@ function Home() {
       <JobSeekerSection />
       <RecruiterSection />
       <Footer />
-      
-     
     </>
   );
 }

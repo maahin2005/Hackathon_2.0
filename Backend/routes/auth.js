@@ -34,13 +34,6 @@ router.get(
   githubCallback
 );
 
-// app.get("/logout", (req, res) => {
-//   req.logout(() => {
-//     res.redirect("http://localhost:3000");
-//   });
-// });
-
-// Logout
 router.get("/logout", (req, res, next) => {
   req.logout((err) => {
     if (err) {
@@ -58,7 +51,6 @@ router.get("/logout", (req, res, next) => {
   });
 });
 
-// Check if user is logged in
 router.get("/auth/user", (req, res) => {
   res.send(req.user || null);
 });
