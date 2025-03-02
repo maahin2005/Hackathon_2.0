@@ -1,11 +1,21 @@
 import React from "react";
-import { FaSearch } from "react-icons/fa"; 
+import { FaSearch } from "react-icons/fa";
 
 const FilterDropdown = ({ label, options }) => {
   return (
     <div>
-      <label style={{ color: "white", fontSize: "14px" }}>{label}</label>
-      <select style={{ padding: "8px", borderRadius: "5px", marginTop: "5px" }}>
+      <label style={{ color: "#333", fontSize: "14px", fontWeight: "bold" }}>{label}</label>
+      <select
+        style={{
+          padding: "10px",
+          borderRadius: "8px",
+          marginTop: "5px",
+          border: "1px solid #ccc",
+          background: "#fff",
+          width: "180px",
+          boxShadow: "2px 2px 5px rgba(0, 0, 0, 0.1)"
+        }}
+      >
         <option value="">Select {label}</option>
         {options.map((option, index) => (
           <option key={index} value={option.value}>
@@ -24,29 +34,47 @@ const FilterHeader = () => {
         style={{
           display: "flex",
           flexWrap: "wrap",
-          gap: "15px",
-          padding: "10px",
-          border: "1px solid gray",
-          borderRadius: "8px",
-          background: "rgba(255, 255, 255, 0.1)",
+          gap: "20px",
+          padding: "20px",
+          borderRadius: "12px",
+          background: "rgba(173, 216, 230, 0.3)", // Light blue background
+          boxShadow: "4px 4px 10px rgba(0, 0, 0, 0.1)", // Soft shadow
+          justifyContent: "center"
         }}
       >
+        {/* Employee Type */}
         <FilterDropdown
-          label="Car Brand"
+          label="Employee Type"
           options={[
-            { value: "volvo", label: "Volvo" },
-            { value: "bmw", label: "BMW" },
-            { value: "audi", label: "Audi" },
+            { value: "dsa", label: "DSA" },
+            { value: "da", label: "DA" },
+            { value: "mern", label: "MERN" },
+            { value: "mean", label: "MEAN" },
           ]}
         />
+
+        {/* Score */}
+        <FilterDropdown
+          label="Score"
+          options={[
+            { value: "above_6", label: "Above 6" },
+            { value: "between_7_8", label: "Between 7 and 8" },
+            { value: "above_10", label: "Above 10" },
+          ]}
+        />
+
+        {/* Location */}
         <FilterDropdown
           label="Location"
           options={[
             { value: "delhi", label: "Delhi" },
-            { value: "mumbai", label: "Mumbai" },
             { value: "bangalore", label: "Bangalore" },
+            { value: "pune", label: "Pune" },
+            { value: "gujarat", label: "Gujarat" },
           ]}
         />
+
+        {/* Experience */}
         <FilterDropdown
           label="Experience"
           options={[
@@ -57,12 +85,11 @@ const FilterHeader = () => {
         />
 
         {/* Search Bar */}
-        <div style={{ position: "relative" }}>
+        <div style={{ position: "relative", width: "300px" }}>
           <FaSearch
             style={{
-              
               position: "absolute",
-              left: "10px",
+              left: "12px",
               top: "50%",
               transform: "translateY(-50%)",
               color: "gray",
@@ -72,11 +99,13 @@ const FilterHeader = () => {
             type="text"
             placeholder="Search Employee..."
             style={{
-              padding: "8px",
-              paddingLeft: "30px",
-              borderRadius: "5px",
-              border: "1px solid gray",
-              width: "300px",
+              padding: "10px",
+              paddingLeft: "35px",
+              borderRadius: "8px",
+              border: "1px solid #ccc",
+              width: "100%",
+              background: "#fff",
+              boxShadow: "2px 2px 5px rgba(0, 0, 0, 0.1)",
             }}
           />
         </div>
