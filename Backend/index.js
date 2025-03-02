@@ -9,6 +9,7 @@ import session from "express-session";
 import "./config/googleAuth.js"; // Google OAuth config
 import "./config/githubAuth.js"; // GitHub OAuth config
 import userRoute from "./routes/user.js";
+import githubRoute from "./routes/github.js";
 dotenv.config();
 
 const PORT = process.env.PORT || 8080;
@@ -29,6 +30,7 @@ app.use(passport.session());
 // Routes
 app.use("/auth", authRoutes);
 app.use("/users", userRoute);
+app.use("/github", githubRoute);
 app.get("/", (_, res) => {
   res.status(200).json({ status: "Server is healthy! Enjoy............" });
 });
