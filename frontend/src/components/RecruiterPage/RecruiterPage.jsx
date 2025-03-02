@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import RecruiterCard from '../Recruiter Card/RecruiterCard.jsx';
 import axios from 'axios';
 import FilterHeader from '../FilterHeader/FilterHeader.jsx'
-
+import Footer from '../Footer/Footer.jsx';
 const backendBaseUrl = import.meta.env.VITE_BACKEND_URL;
 
 const RecruiterCard = () => {
@@ -27,11 +27,12 @@ const RecruiterCard = () => {
         <div className="container mx-auto px-4 py-8">
             <h1 className="text-2xl font-bold mb-6 text-center">RecruiterCard</h1>
             <FilterHeader/>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 border space-x-1 py-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 py-6">
                 {RecruiterCard.map((recruiter) => (
                     <RecruiterCard key={recruiter._id} recruiter={recruiter} />
                 ))}
             </div>
+            <Footer/>
         </div>
     );
 };

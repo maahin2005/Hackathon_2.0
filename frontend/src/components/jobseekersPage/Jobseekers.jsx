@@ -4,7 +4,7 @@ import EmployeeCard from '../EmployeeCard/EmployeeCard';
 import axios from 'axios';
 import FilterHeader from '../FilterHeader/FilterHeader.jsx'
 const backendBaseUrl = import.meta.env.VITE_BACKEND_URL;
-
+import Footer from '../Footer/Footer.jsx';
 const Jobseekers = () => {
     const [jobseekers, setJobseekers] = useState([]);
 
@@ -26,11 +26,11 @@ const Jobseekers = () => {
         <div className="container mx-auto px-4 py-8">
             <h1 className="text-2xl font-bold mb-6 text-center">Jobseekers</h1>
             <FilterHeader/>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 border space-x-1 py-6">
-                {jobseekers.map((employee) => (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 py-6">                {jobseekers.map((employee) => (
                     <EmployeeCard key={employee._id} employee={employee} />
                 ))}
             </div>
+            <Footer/>
         </div>
     );
 };
