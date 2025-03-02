@@ -3,6 +3,14 @@ import { useState } from "react";
 const HeroSection = () => {
   const [activeRole, setActiveRole] = useState("recruiter");
 
+  const handleGithubLogin = () => {
+    window.open("http://localhost:8080/auth/github/callback", "_self");
+  };
+
+  const handleGoogleLogin = () => {
+    window.location.href = "http://localhost:8080/auth/google";
+  };
+
   return (
     <div className="w-[90%] flex flex-col md:flex-row h-screen lg:h-[90vh] items-center justify-around bg-transparent text-white p-8 transition-all animate-darkTransition ">
       {/* Buttons Section */}
@@ -40,7 +48,7 @@ const HeroSection = () => {
               Need top candidates? Our platform helps you find skilled professionals
               easily and quickly.
             </p>
-            <button className="mt-6 px-6 py-3 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition">
+            <button onClick={handleGithubLogin} className="mt-6 px-6 py-3 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition">
               Get Started
             </button>
           </>
@@ -52,7 +60,7 @@ const HeroSection = () => {
             <p className="mt-4 text-lg text-gray-700 max-w-lg">
               Looking for work? Apply to top companies and take the next step in your career.
             </p>
-            <button className="mt-6 px-6 py-3 bg-green-600 text-white font-bold rounded-lg hover:bg-green-700 transition">
+            <button onClick={handleGoogleLogin} className="mt-6 px-6 py-3 bg-green-600 text-white font-bold rounded-lg hover:bg-green-700 transition">
               Explore Jobs
             </button>
           </>

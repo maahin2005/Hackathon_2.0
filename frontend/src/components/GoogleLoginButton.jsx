@@ -1,7 +1,7 @@
 // client/src/components/Login.js
 import React from "react";
 
-const Login = () => {
+const GoogleLoginButton = () => {
   const handleGoogleLogin = () => {
     window.location.href = "http://localhost:8080/auth/google";
   };
@@ -14,4 +14,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default GoogleLoginButton;
