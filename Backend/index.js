@@ -8,51 +8,61 @@ import passport from "passport";
 import session from "express-session";
 import "./config/googleAuth.js"; // Google OAuth config
 import "./config/githubAuth.js"; // GitHub OAuth config
+import userRoute from "./routes/user.js";
 dotenv.config();
-
 
 const PORT = process.env.PORT || 8080;
 const MongoDB = process.env.MONGODB_URL;
 const GITHUB_ACCESS_TOKEN = process.env.GITHUB_ACCESS_TOKEN;
 
-const app = express()
+const app = express();
 app.use(express.json());
 app.use(cors());
 // app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 
-app.use(session({ secret: "your_secret", resave: false, saveUninitialized: true }));
+app.use(
+  session({ secret: "your_secret", resave: false, saveUninitialized: true })
+);
 app.use(passport.initialize());
 app.use(passport.session());
 
 // Routes
 app.use("/auth", authRoutes);
+app.use("/users", userRoute);
 app.get("/", (_, res) => {
   res.status(200).json({ status: "Server is healthy! Enjoy............" });
 });
 
-app.get('/github/:username', async (req, res) => {
+app.get("/github/:username", async (req, res) => {
   try {
-      const username = req.params.username;
+    const username = req.params.username;
 
-      // Fetch user profile
-      const userResponse = await axios.get(`https://api.github.com/users/${username}`, {
-          headers: { Authorization: `token ${GITHUB_ACCESS_TOKEN}` }
-      });
+    // Fetch user profile
+    const userResponse = await axios.get(
+      `https://api.github.com/users/${username}`,
+      {
+        headers: { Authorization: `token ${GITHUB_ACCESS_TOKEN}` },
+      }
+    );
 
-      // Fetch repos
-      const reposResponse = await axios.get(`https://api.github.com/users/${username}/repos`, {
-          headers: { Authorization: `token ${GITHUB_ACCESS_TOKEN}` }
-      });
+    // Fetch repos
+    const reposResponse = await axios.get(
+      `https://api.github.com/users/${username}/repos`,
+      {
+        headers: { Authorization: `token ${GITHUB_ACCESS_TOKEN}` },
+      }
+    );
 
-      res.json({
-          profile: userResponse.data,
-          repos: reposResponse.data
-      });
+    res.json({
+      profile: userResponse.data,
+      repos: reposResponse.data,
+    });
   } catch (error) {
-      res.status(500).json({ error: "Error fetching GitHub data", msg: error.message });
+    res
+      .status(500)
+      .json({ error: "Error fetching GitHub data", msg: error.message });
   }
 });
-
 
 app.listen(PORT, async () => {
   try {

@@ -12,19 +12,19 @@ passport.use(
       clientID: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
       callbackURL: "http://localhost:8080/auth/github/callback",
+      scope: ["user:email"],
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
-        console.log("GitHub Profile => ", profile);
+        const email = profile.emails?.[0]?.value || null;
 
         // Check if the user already exists in the database
         let user = await UserModel.findOne({ githubId: profile.id });
 
         if (!user) {
-          // Create a new user if not found
           user = new UserModel({
             name: profile.displayName || profile.username,
-            email: profile.emails?.[0]?.value || "",
+            email: email, // Might be null if GitHub doesn't provide it
             profileImage: profile.photos?.[0]?.value || "",
             githubId: profile.id,
             githubUsername: profile.username,
