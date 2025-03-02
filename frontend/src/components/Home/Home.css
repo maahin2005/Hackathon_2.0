@@ -1,0 +1,23 @@
+.landing-page {
+    height: 100vh; /* Full screen height */
+    width: 100%;   /* Full width */
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+    animation: darkTransition 3s ease-in-out reverse infinite;
+  }
+  
+  /* Keyframes for smooth transition */
+  @keyframes darkTransition {
+    0% {
+      background-color: black;
+    }
+    100% {
+      background-color: #1a1a1a; /* Dark Gray */
+    }
+  }
+  
