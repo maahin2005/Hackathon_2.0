@@ -1,30 +1,30 @@
 // client/src/components/Dashboard.js
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {jwtDecode} from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 
 const Dashboard = () => {
-    const navigate = useNavigate();
-    const [user, setUser] = useState(null);
+  const navigate = useNavigate();
+  const [user, setUser] = useState(null);
 
-    useEffect(() => {
-        const token = new URLSearchParams(window.location.search).get("token");
-        if (!token) return navigate("/");
+  useEffect(() => {
+    const token = new URLSearchParams(window.location.search).get("token");
+    if (!token) return navigate("/");
 
-        try {
-            const decoded = jwtDecode(token);
-            setUser(decoded);
-        } catch (error) {
-            navigate("/");
-        }
-    }, [navigate]);
+    try {
+      const decoded = jwtDecode(token);
+      setUser(decoded);
+    } catch (error) {
+      navigate("/");
+    }
+  }, [navigate]);
 
-    return (
-        <div>
-            <h2>Welcome, {user?.id}</h2>
-            <a href="http://localhost:8080/auth/logout">Logout</a>
-        </div>
-    );
+  return (
+    <div>
+      <h2>Welcome, {user?.id}</h2>
+      <a href={`${import.meta.env.VITE_BACKEND_URL}/auth/logout`}>Logout</a>
+    </div>
+  );
 };
 
 export default Dashboard;

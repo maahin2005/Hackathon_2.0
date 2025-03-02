@@ -4,11 +4,11 @@ const HeroSection = () => {
   const [activeRole, setActiveRole] = useState("recruiter");
 
   const handleGithubLogin = () => {
-    window.open("http://localhost:8080/auth/github/callback", "_self");
+    window.open(`${BASE_URL}/auth/github/callback`, "_self");
   };
 
   const handleGoogleLogin = () => {
-    window.location.href = "http://localhost:8080/auth/google";
+    window.location.href = `${BASE_URL}/auth/google`;
   };
 
   return (
@@ -45,10 +45,13 @@ const HeroSection = () => {
               Find the Best Talent!
             </h1>
             <p className="mt-4 text-lg text-gray-700 max-w-lg">
-              Need top candidates? Our platform helps you find skilled professionals
-              easily and quickly.
+              Need top candidates? Our platform helps you find skilled
+              professionals easily and quickly.
             </p>
-            <button onClick={handleGithubLogin} className="mt-6 px-6 py-3 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition">
+            <button
+              onClick={handleGithubLogin}
+              className="mt-6 px-6 py-3 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 transition"
+            >
               Get Started
             </button>
           </>
@@ -58,9 +61,13 @@ const HeroSection = () => {
               Get Your Dream Job!
             </h1>
             <p className="mt-4 text-lg text-gray-700 max-w-lg">
-              Looking for work? Apply to top companies and take the next step in your career.
+              Looking for work? Apply to top companies and take the next step in
+              your career.
             </p>
-            <button onClick={handleGoogleLogin} className="mt-6 px-6 py-3 bg-green-600 text-white font-bold rounded-lg hover:bg-green-700 transition">
+            <button
+              onClick={handleGoogleLogin}
+              className="mt-6 px-6 py-3 bg-green-600 text-white font-bold rounded-lg hover:bg-green-700 transition"
+            >
               Explore Jobs
             </button>
           </>
