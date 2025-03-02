@@ -47,9 +47,6 @@ function Home() {
       <JobSeekerSection />
       <RecruiterSection />
       <Footer />
-      
-      {/* ✅ Pass employee data properly */}
-      <EmployeeProfile employee={sampleEmployee} />
     </>
   );
 }
