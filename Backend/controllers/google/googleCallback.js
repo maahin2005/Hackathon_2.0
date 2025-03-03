@@ -15,7 +15,7 @@ const googleCallback = (req, res) => {
     maxAge: 24 * 60 * 60 * 1000,
   });
 
-  // res.redirect("http://localhost:5173/dashboard");
+  res.redirect("http://localhost:5173/recruiter/dashboard");
 
   return res.json({ success: true, message: "User Signin Successfully" });
 };

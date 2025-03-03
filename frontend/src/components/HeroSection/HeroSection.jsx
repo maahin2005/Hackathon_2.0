@@ -68,7 +68,7 @@ const HeroSection = () => {
               professionals easily and quickly.
             </p>
             <button
-                onClick={handleGithubLogin}
+                onClick={handleGoogleLogin}
                 className="mt-6 px-6 py-3 text-lg font-bold rounded-lg transition-all duration-500 ease-in-out 
                           bg-gradient-to-r from-blue-700 via-blue-600 to-blue-800 text-white 
                           shadow-md shadow-blue-500/50 border-2 border-transparent 
@@ -89,7 +89,7 @@ const HeroSection = () => {
               your career.
             </p>
             <button
-                onClick={handleGoogleLogin}
+                onClick={handleGithubLogin}
                 className="mt-6 px-6 py-3 text-lg font-bold rounded-lg transition-all duration-500 ease-in-out 
                           bg-gradient-to-r from-green-700 via-green-600 to-green-800 text-white 
                           shadow-md shadow-green-500/50 border-2 border-transparent 

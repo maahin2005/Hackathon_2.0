@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState } from "react";
-import EmployeeCard from '../EmployeeCard/EmployeeCard';
+import EmployeeCard from '../../components/EmployeeCard/EmployeeCard.jsx';
 import axios from 'axios';
-import FilterHeader from '../FilterHeader/FilterHeader.jsx'
+import FilterHeader from '../../components/FilterHeader/FilterHeader.jsx'
 const backendBaseUrl = import.meta.env.VITE_BACKEND_URL;
-import Footer from '../Footer/Footer.jsx';
+import Footer from '../../components/Footer/Footer.jsx';
 const Jobseekers = () => {
     const [jobseekers, setJobseekers] = useState([]);
 
