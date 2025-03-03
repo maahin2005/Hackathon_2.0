@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState } from "react";
-import RecruiterCard from '../Recruiter Card/RecruiterCard.jsx';
+import RecruiterCard from '../../components/Recruiter/RecruiterCard';
 import axios from 'axios';
-import FilterHeader from '../FilterHeader/FilterHeader.jsx'
-import Footer from '../Footer/Footer.jsx';
+import FilterHeader from '../../components/FilterHeader/FilterHeader.jsx';
+import Footer from '../../components/Footer/Footer.jsx';
 const backendBaseUrl = import.meta.env.VITE_BACKEND_URL;
 
-const RecruiterCard = () => {
+const RecruiterPage = () => {
     const [RecruiterCard, setRecruiterCard] = useState([]);
 
     useEffect(() => {
@@ -41,4 +41,4 @@ RecruiterCard.propTypes = {
     props: PropTypes.any
 };
 
-export default RecruiterCard;
+export default RecruiterPage;
