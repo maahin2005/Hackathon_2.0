@@ -9,6 +9,7 @@ import Home from "./../components/Home/Home";
 import JobseekerRoutes from "./JobseekerRoutes";
 import RecruiterRoutes from "./RecruiterRoutes";
 import RecruiterCard from "../Pages/RecruiterPage/RecruiterPage";
+import AuthRoutes from "./AuthRoutes";
 
 function Routings() {
   return (
