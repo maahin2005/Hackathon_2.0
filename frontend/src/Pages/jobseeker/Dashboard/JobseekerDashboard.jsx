@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import CandidateProfile from "../../../components/Custom/JobseekerProfile/CandidateProfile";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
+import CandidateProfile from "./../../../components/Custom/JobseekerProfile/CandidateProfile";
 import {
   setCandidateData,
   setGithubProfile,

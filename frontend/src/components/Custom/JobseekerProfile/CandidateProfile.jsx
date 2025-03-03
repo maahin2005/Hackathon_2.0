@@ -1,6 +1,6 @@
 import React from "react";
 import { FaGithub, FaEnvelope } from "react-icons/fa";
-import FetchScore from "../../jobseeker/ImproveScore/ImproveScore";
+import FetchScore from "./../../Jobseeker/ImproveScore/ImproveScore";
 
 const CandidateProfile = ({ candidate }) => {
   return (
