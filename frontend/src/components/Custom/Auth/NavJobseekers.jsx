@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Logo from "../Logo";
+// import Logo from "../Logo";
 import JobseekerBTN from "../../Custom/Buttons/JobseekerBTN";
-// import JobseekerBTN from "./../Buttons/JobseekerBTN";
 
 function NavJobseekers() {
   const [isOpen, setIsOpen] = useState(false);
