@@ -1,11 +1,9 @@
 import axios from "axios";
-// 
+//
 
 // Fetch GitHub Repos for an Authenticated User
 export const fetchRepos = async (req, res) => {
   try {
-    // Get GitHub username from request (Assuming user is logged in)
-    console.log(req.body.user);
     const { githubUsername } = req.body.user; // Ensure user is authenticated
 
     if (!githubUsername) {
@@ -13,11 +11,14 @@ export const fetchRepos = async (req, res) => {
     }
 
     // Fetch Repos from GitHub API
-    const response = await axios.get(`https://api.github.com/users/${githubUsername}/repos`, {
-      headers: {
-        Authorization: `token ${process.env.GITHUB_ACCESS_TOKEN}`, // Use OAuth token if needed
-      },
-    });
+    const response = await axios.get(
+      `https://api.github.com/users/${githubUsername}/repos`,
+      {
+        headers: {
+          Authorization: `token ${process.env.GITHUB_ACCESS_TOKEN}`, // Use OAuth token if needed
+        },
+      }
+    );
 
     // Extract only repo names using map()
     const repoNames = response.data.map((repo) => repo.name);
@@ -39,7 +40,9 @@ export const fetchCategories = async (req, res) => {
     }
 
     // Fetch Repos
-    const response = await axios.get(`https://api.github.com/users/${githubUsername}/repos`);
+    const response = await axios.get(
+      `https://api.github.com/users/${githubUsername}/repos`
+    );
 
     // Categorize by Language
     const categories = {};

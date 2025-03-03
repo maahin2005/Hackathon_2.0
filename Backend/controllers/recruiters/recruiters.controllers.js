@@ -4,7 +4,7 @@ export const hireTalents = async (_, res) => {
   try {
     const candidates = await UserModel.find({
       role: "jobseeker",
-      score: { $gte: 0.2 }, // Filter for scores >= 0.2
+      score: { $gte: 20 }, // Filter for scores >= 0.2
     }).sort({
       score: -1, // Sort in descending order
     });

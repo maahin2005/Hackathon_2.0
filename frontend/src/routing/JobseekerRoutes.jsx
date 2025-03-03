@@ -5,7 +5,7 @@ function JobseekerRoutes({ children }) {
   const isJobseeker = true;
   if (!isJobseeker) return <Navigate to={"/login"} />;
 
-  return children;
+  return <>{children}</>;
 }
 
 export default JobseekerRoutes;

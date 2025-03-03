@@ -1,15 +1,12 @@
-import React, { useEffect } from "react"; 
-import AOS from "aos"; 
-import "aos/dist/aos.css"; 
-import Navbar from "../Navbar/Navbar";
-import HeroSection from "../HeroSection/HeroSection";
+import React, { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import "./Home.css";
-import RecruiterSection from "../RecruiterSection/RecruiterSection";
-import JobSeekerSection from "../JobSeekerSection/JobSeekerSection";
-import Footer from "../Footer/Footer";
-
-
-
+import Navbar from "./../custom/Navbar/Navbar";
+import Footer from "../Custom/Footer/Footer";
+import HeroSection from "./HeroSection/HeroSection";
+import JobSeekerSection from "./JobSeekerSection/JobSeekerSection";
+import RecruiterSection from "./RecruiterSection/RecruiterSection";
 
 function Home() {
   useEffect(() => {

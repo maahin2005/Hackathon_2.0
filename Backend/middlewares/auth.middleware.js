@@ -3,7 +3,6 @@ import jwt from "jsonwebtoken";
 export const auth = (req, res, next) => {
   // Extract token from cookies
   const token = req.cookies?.token;
-
   // Check if token exists
   if (!token) {
     return res
@@ -14,8 +13,6 @@ export const auth = (req, res, next) => {
   try {
     // Verify the token
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
-    console.log("decoded==> ", decoded);
 
     // Attach the decoded user information to the request object
     req.user = decoded;

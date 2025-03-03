@@ -12,7 +12,7 @@ const FilterDropdown = ({ label, options }) => {
           border: "1px solid #ccc",
           background: "#fff",
           width: "180px",
-          boxShadow: "2px 2px 5px rgba(0, 0, 0, 0.1)"
+          boxShadow: "2px 2px 5px rgba(0, 0, 0, 0.1)",
         }}
       >
         <option value="">Select {label}</option>
@@ -30,15 +30,16 @@ const FilterHeader = () => {
   return (
     <div style={{ textAlign: "center", padding: "20px" }}>
       <div
+        className="p-5"
         style={{
           display: "flex",
           flexWrap: "wrap",
           gap: "20px",
-          padding: "20px",
+
           borderRadius: "12px",
           background: "rgba(173, 216, 230, 0.3)", // Light blue background
           boxShadow: "4px 4px 10px rgba(0, 0, 0, 0.1)", // Soft shadow
-          justifyContent: "space-evenly"
+          justifyContent: "space-evenly",
         }}
       >
         {/* Employee Type */}

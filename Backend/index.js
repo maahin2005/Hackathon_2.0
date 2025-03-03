@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import axios from "axios";
+// import axios from "axios";
 import connectDB from "./config/db.js";
 import authRoutes from "./routes/auth.js";
 import passport from "passport";
@@ -9,21 +9,33 @@ import session from "express-session";
 import "./config/googleAuth.js"; // Google OAuth config
 import "./config/githubAuth.js"; // GitHub OAuth config
 import userRoute from "./routes/user.js";
-// import { auth } from "./middlewares/auth.middleware.js";
+import { auth } from "./middlewares/auth.middleware.js";
 import githubRoute from "./routes/github.js";
 import categoryRoutes from "./routes/category.route.js";
 import recruiterRoutes from "./routes/recruiter.route.js";
 import companyRoutes from "./routes/company.route.js";
+import cookieParser from "cookie-parser";
+import jobseekerRoute from "./routes/jobseeker.route.js";
+import verifyJobseeker from "./middlewares/verifyJobseeker.middleware.js";
+import verifyRecruiter from "./middlewares/verifyRecruiter.middleware.js";
 dotenv.config();
 
 const PORT = process.env.PORT || 8080;
 const MongoDB = process.env.MONGODB_URL;
-const GITHUB_ACCESS_TOKEN = process.env.GITHUB_ACCESS_TOKEN;
+// const GITHUB_ACCESS_TOKEN = process.env.GITHUB_ACCESS_TOKEN;
 
 const app = express();
+
+app.use(cookieParser());
 app.use(express.json());
-app.use(cors());
-// app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+app.use(express.urlencoded({ extended: true }));
+
+app.use(
+  cors({
+    origin: process.env.CORS_ORIGIN, // Frontend URL
+    credentials: true, // Allow cookies
+  })
+);
 
 app.use(
   session({ secret: "your_secret", resave: false, saveUninitialized: true })
@@ -33,45 +45,47 @@ app.use(passport.session());
 
 // Routes
 app.use("/auth", authRoutes);
-app.use("/categories", categoryRoutes);
-app.use("/companies", companyRoutes);
 app.use("/users", userRoute);
 app.use("/github", githubRoute);
-app.use("/recruiters", recruiterRoutes);
+
+app.use("/categories", auth, categoryRoutes);
+app.use("/companies", auth, verifyRecruiter, companyRoutes);
+app.use("/jobseekers", auth, verifyJobseeker, jobseekerRoute);
+app.use("/recruiters", auth, verifyRecruiter, recruiterRoutes);
 app.get("/", (_, res) => {
   res.status(200).json({ status: "Server is healthy! Enjoy............" });
 });
 
-app.get("/github/:username", async (req, res) => {
-  try {
-    const username = req.params.username;
+// app.get("/github/:username", async (req, res) => {
+//   try {
+//     const username = req.params.username;
 
-    // Fetch user profile
-    const userResponse = await axios.get(
-      `https://api.github.com/users/${username}`,
-      {
-        headers: { Authorization: `token ${GITHUB_ACCESS_TOKEN}` },
-      }
-    );
+//     // Fetch user profile
+//     const userResponse = await axios.get(
+//       `https://api.github.com/users/${username}`,
+//       {
+//         headers: { Authorization: `token ${GITHUB_ACCESS_TOKEN}` },
+//       }
+//     );
 
-    // Fetch repos
-    const reposResponse = await axios.get(
-      `https://api.github.com/users/${username}/repos`,
-      {
-        headers: { Authorization: `token ${GITHUB_ACCESS_TOKEN}` },
-      }
-    );
+//     // Fetch repos
+//     const reposResponse = await axios.get(
+//       `https://api.github.com/users/${username}/repos`,
+//       {
+//         headers: { Authorization: `token ${GITHUB_ACCESS_TOKEN}` },
+//       }
+//     );
 
-    res.json({
-      profile: userResponse.data,
-      repos: reposResponse.data,
-    });
-  } catch (error) {
-    res
-      .status(500)
-      .json({ error: "Error fetching GitHub data", msg: error.message });
-  }
-});
+//     res.json({
+//       profile: userResponse.data,
+//       repos: reposResponse.data,
+//     });
+//   } catch (error) {
+//     res
+//       .status(500)
+//       .json({ error: "Error fetching GitHub data", msg: error.message });
+//   }
+// });
 
 app.listen(PORT, async () => {
   try {

@@ -1,63 +1,49 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import Dashboard from "./../components/Dashboard";
-import GoogleLoginButton from "./../components/GoogleLoginButton";
-import GithubLoginButton from "./../components/authButtons/GithubLoginButton";
-import Jobseekers from "./../Pages/jobseekersPage/Jobseekers";
-import EmployeeProfile from "./../Pages/Singleemployee/SingleEmplee";
-import Home from "./../components/Home/Home";
-import JobseekerRoutes from "./JobseekerRoutes";
-import RecruiterRoutes from "./RecruiterRoutes";
-import RecruiterCard from "../Pages/RecruiterPage/RecruiterPage";
-import AuthRoutes from "./AuthRoutes";
-
+import HireTalents from "../Pages/Recruiter/hireTalent/HireTalents";
+import Home from "../components/Home/Home";
+import ProtectedJobseekerRoutes from "./ProtectedJobseekerRoutes";
+import ProtectedRecruiterRoutes from "./ProtectedRecruiterRoutes";
+import JobseekerDashboard from "../Pages/jobseeker/Dashboard/JobseekerDashboard";
+import TalentProfile from "../Pages/recruiter/hireTalent/TalentProfile";
+import RecruiterDashboard from "../Pages/recruiter/dashboard/RecruiterDashboard";
+import Login from "../Pages/Login";
 function Routings() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/login" element={<Login />} />
+
       <Route
-        path="/login"
+        path="/jobseeker/dashboard"
         element={
-          <>
-            <GoogleLoginButton />
-            <GithubLoginButton />
-          </>
+          <ProtectedJobseekerRoutes>
+            <JobseekerDashboard />
+          </ProtectedJobseekerRoutes>
         }
       />
       <Route
-        path="/dashboard"
+        path="/recruiter/candidate-profile"
         element={
-          <AuthRoutes>
-            <JobseekerRoutes>
-              <Dashboard />
-            </JobseekerRoutes>
-          </AuthRoutes>
-        }
-      />
-      <Route
-        path="/jobseekers"
-        element={
-          <AuthRoutes>
-            <JobseekerRoutes>
-              <Jobseekers />
-            </JobseekerRoutes>
-          </AuthRoutes>
-        }
-      />
-      <Route
-        path="/jobseekers/profile"
-        element={
-          <JobseekerRoutes>
-            <EmployeeProfile />
-          </JobseekerRoutes>
+          <ProtectedRecruiterRoutes>
+            <TalentProfile />
+          </ProtectedRecruiterRoutes>
         }
       />
       <Route
         path="/recruiter/dashboard"
         element={
-          <RecruiterRoutes>
-            <RecruiterCard />
-          </RecruiterRoutes>
+          <ProtectedRecruiterRoutes>
+            <RecruiterDashboard />
+          </ProtectedRecruiterRoutes>
+        }
+      />
+      <Route
+        path="/recruiter/hire-talent"
+        element={
+          <ProtectedRecruiterRoutes>
+            <HireTalents />
+          </ProtectedRecruiterRoutes>
         }
       />
     </Routes>

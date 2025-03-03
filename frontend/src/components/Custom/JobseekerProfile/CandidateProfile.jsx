@@ -1,59 +1,37 @@
 import React from "react";
 import { FaGithub, FaEnvelope } from "react-icons/fa";
-import FetchScore from "../../components/ImproveScore/ImproveScore";
-import { useSelector } from "react-redux";
+import FetchScore from "../../jobseeker/ImproveScore/ImproveScore";
 
-const sampleEmployee = {
-  name: "John Doe",
-  email: "john.doe@example.com",
-  githubUsername: "akmurmu82",
-  profileImage: "https://avatars.githubusercontent.com/u/195257667?v=4",
-  role: "Job Seeker",
-  score: 85,
-  topRepos: [
-    {
-      name: "React Portfolio",
-      description: "A sleek and modern React portfolio template.",
-      html_url: "https://github.com/johndoe/react-portfolio",
-    },
-    {
-      name: "Node API",
-      description: "REST API built with Node.js and Express.",
-      html_url: "https://github.com/johndoe/node-api",
-    },
-  ],
-  createdAt: "2025-03-02T10:20:10.835Z",
-  updatedAt: "2025-03-02T12:45:30.835Z",
-};
-
-const EmployeeProfile = ({ employee = sampleEmployee }) => {
-  const score = useSelector((state) => state.candidate.score);
+const CandidateProfile = ({ candidate }) => {
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">
+    <div className="my-20 max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">
       {/* Header Section */}
       <div className="flex items-center gap-6">
         <img
-          src={employee.profileImage}
-          alt={employee.name}
-          className="w-24 h-24 rounded-full border"
+          src={candidate.githubProfile || "https://github.com"}
+          alt={candidate.candidateName}
+          className="w-32 h-32 rounded-full border"
         />
         <div>
-          <h1 className="text-2xl font-bold text-gray-800">{employee.name}</h1>
-          <p className="text-gray-600 capitalize">{employee.role}</p>
+          <h1 className="text-4xl font-bold text-gray-800">
+            {candidate.candidateName}
+          </h1>
+          {/* <p className="text-gray-600 capitalize">{candidate.role}</p> */}
           <div className="flex items-center gap-3 mt-2">
             <a
-              href={`mailto:${employee.email}`}
+              href={`mailto:${candidate.email}`}
               className="text-gray-600 hover:text-gray-900 flex items-center gap-1"
             >
-              <FaEnvelope /> {employee.email}
+              <FaEnvelope /> {candidate.email}
             </a>
             <a
-              href={`https://github.com/${employee.githubUsername}`}
+              href={`https://github.com/${candidate?.githubUsername}`}
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-600 hover:text-gray-900 flex items-center gap-1"
             >
-              <FaGithub /> {employee.githubUsername}
+              <FaGithub />
+              {candidate?.githubUsername}
             </a>
           </div>
         </div>
@@ -62,18 +40,20 @@ const EmployeeProfile = ({ employee = sampleEmployee }) => {
       {/* Score Section */}
       <div className="mt-6 p-4 bg-gray-100 rounded-md">
         <h2 className="text-lg font-semibold">Score</h2>
-        <p className="text-xl font-bold">{score}</p>
+        <p className="text-xl font-bold">{candidate.score}</p>
       </div>
 
       {/* FetchScore Component */}
-      <FetchScore employee={employee} />
+      {candidate?.githubUsername && (
+        <FetchScore githubUsername={candidate?.githubUsername} />
+      )}
 
       {/* Top Repositories Section */}
       <div className="mt-6">
         <h2 className="text-lg font-semibold">Top Repositories</h2>
-        {employee.topRepos.length > 0 ? (
+        {candidate.topRepos?.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-3">
-            {employee.topRepos.map((repo, index) => (
+            {candidate.topRepos.map((repo, index) => (
               <div
                 key={index}
                 className="p-4 border rounded-md shadow-sm bg-gray-50"
@@ -100,11 +80,11 @@ const EmployeeProfile = ({ employee = sampleEmployee }) => {
 
       {/* Created & Updated At Section */}
       <div className="mt-6 text-gray-500 text-sm">
-        <p>Created at: {new Date(employee.createdAt).toLocaleString()}</p>
-        <p>Last updated: {new Date(employee.updatedAt).toLocaleString()}</p>
+        <p>Created at: {new Date(candidate.createdAt).toLocaleString()}</p>
+        <p>Last updated: {new Date(candidate.updatedAt).toLocaleString()}</p>
       </div>
     </div>
   );
 };
 
-export default EmployeeProfile;
+export default CandidateProfile;

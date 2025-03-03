@@ -7,10 +7,12 @@ import {
   updateCategory,
 } from "../controllers/category/category.controllers.js";
 
+import verifyRecruiter from "../middlewares/verifyRecruiter.middleware.js";
+
 const categoryRoutes = express.Router();
 
 // Create a new category
-categoryRoutes.post("/", createCategory);
+categoryRoutes.post("/", verifyRecruiter, createCategory);
 
 // Read all categories
 categoryRoutes.get("/", getCategories);
@@ -19,7 +21,7 @@ categoryRoutes.get("/", getCategories);
 categoryRoutes.get("/:id", getCategoryById);
 
 // Update a category by ID
-categoryRoutes.put("/update/:id", updateCategory);
+categoryRoutes.put("/update/:id", verifyRecruiter, updateCategory);
 
 // Delete a category by ID
 categoryRoutes.delete("/delete/:id", deleteCategory);

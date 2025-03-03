@@ -1,5 +1,5 @@
-const verifyRecruiter = (req, res, next) => {
-  if (req.user.userRole === "recruiter") {
+const verifyJobseeker = async (req, res, next) => {
+  if (req.user.userRole === "jobseeker") {
     return next();
   }
 
@@ -8,4 +8,4 @@ const verifyRecruiter = (req, res, next) => {
     .json({ message: "Unauthorized - You are not allowed to access this." });
 };
 
-export default verifyRecruiter;
+export default verifyJobseeker;
