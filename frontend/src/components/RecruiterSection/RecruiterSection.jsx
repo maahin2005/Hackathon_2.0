@@ -7,7 +7,7 @@ const RecruiterSection = () => {
         data-aos="flip-right" // Animation effect
         data-aos-duration="1000" // Duration in milliseconds
       >
-        <h2 className="text-4xl font-bold text-blue-400">
+        <h2 className="text-4xl font-bold text-blue-400 transition-colors hover:text-blue-600">
           🚀 Find Top Talent with Precision!
         </h2>
         <p className="text-lg text-gray-300">
@@ -29,7 +29,9 @@ const RecruiterSection = () => {
             impact.
           </li>
         </ul>
-        <button className="mt-4 px-6 py-3 text-lg font-semibold bg-blue-500 hover:bg-blue-600 rounded-lg transition-all">
+        <button className="mt-4 px-6 py-3 text-lg font-semibold  rounded-lg transition-all duration-500 ease-in-out
+        border-2 bg-gradient-to-r from-blue-700 via-blue-500 to-blue-700 hover:bg-gradient-to-r hover:from-blue-800 hover:via-blue-700 hover:900
+        shadow:md shadow-blue-500/50  hover:shadow-blue-500/40 border-transparent hover:shadow-lg hover:border-blue-400">
           💼 Discover Elite Talent Now
         </button>
       </div>
