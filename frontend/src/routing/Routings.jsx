@@ -3,11 +3,11 @@ import { Route, Routes } from "react-router-dom";
 import Dashboard from "./../components/Dashboard";
 import GoogleLoginButton from "./../components/GoogleLoginButton";
 import GithubLoginButton from "./../components/authButtons/GithubLoginButton";
-// import Jobseekers from "./../components/jobseekersPage/Jobseekers";
 import EmployeeProfile from "./../Pages/Singleemployee/SingleEmplee";
 import Home from "./../components/Home/Home";
 import JobseekerRoutes from "./JobseekerRoutes";
 import Jobseekers from "../Pages/jobseekersPage/Jobseekers";
+import AuthRoutes from "./AuthRoutes";
 
 function Routings() {
   return (
@@ -25,25 +25,31 @@ function Routings() {
       <Route
         path="/dashboard"
         element={
-          <JobseekerRoutes>
-            <Dashboard />
-          </JobseekerRoutes>
+          <AuthRoutes>
+            <JobseekerRoutes>
+              <Dashboard />
+            </JobseekerRoutes>
+          </AuthRoutes>
         }
       />
       <Route
         path="/jobseekers"
         element={
-          <JobseekerRoutes>
-            <Jobseekers/>
-          </JobseekerRoutes>
+          <AuthRoutes>
+            <JobseekerRoutes>
+              <Jobseekers />
+            </JobseekerRoutes>
+          </AuthRoutes>
         }
       />
       <Route
         path="/jobseekers/profile"
         element={
-          <JobseekerRoutes>
-            <EmployeeProfile />
-          </JobseekerRoutes>
+          <AuthRoutes>
+            <JobseekerRoutes>
+              <EmployeeProfile />
+            </JobseekerRoutes>
+          </AuthRoutes>
         }
       />
     </Routes>

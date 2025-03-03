@@ -1,0 +1,16 @@
+{
+    "rewrites": [
+        {
+            "source": "/(.*)",
+            "destination": "/"
+        }
+    ],
+    "github": {
+        "enabled": true,
+        "autoJobCancelation": true,
+        "allowedBranches": [
+            "main",
+            "production"
+        ]
+    }
+}
