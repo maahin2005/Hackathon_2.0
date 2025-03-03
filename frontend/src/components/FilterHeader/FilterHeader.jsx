@@ -4,7 +4,6 @@ import { FaSearch } from "react-icons/fa";
 const FilterDropdown = ({ label, options }) => {
   return (
     <div>
-      <label style={{ color: "#333", fontSize: "14px", fontWeight: "bold" }}>{label}</label>
       <select
         style={{
           padding: "10px",
@@ -39,7 +38,7 @@ const FilterHeader = () => {
           borderRadius: "12px",
           background: "rgba(173, 216, 230, 0.3)", // Light blue background
           boxShadow: "4px 4px 10px rgba(0, 0, 0, 0.1)", // Soft shadow
-          justifyContent: "center"
+          justifyContent: "space-evenly"
         }}
       >
         {/* Employee Type */}
