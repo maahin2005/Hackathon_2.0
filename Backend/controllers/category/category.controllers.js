@@ -1,10 +1,6 @@
-import express from "express";
-import CategoryModel from "../models/Category.js";
+import CategoryModel from "../../models/Category.model.js";
 
-const categoryRoutes = express.Router();
-
-// Create a new category
-categoryRoutes.post("/", async (req, res) => {
+export const createCategory = async (req, res) => {
   try {
     const { name, commits } = req.body;
     const newCategory = new CategoryModel({ name, commits });
@@ -15,20 +11,18 @@ categoryRoutes.post("/", async (req, res) => {
   } catch (error) {
     res.status(400).json({ success: false, message: error.message });
   }
-});
+};
 
-// Read all categories
-categoryRoutes.get("/", async (req, res) => {
+export const getCategories = async (req, res) => {
   try {
     const categories = await CategoryModel.find();
     res.status(200).json({ success: true, data: categories });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
-});
+};
 
-// Read a single category by ID
-categoryRoutes.get("/:id", async (req, res) => {
+export const getCategoryById = async (req, res) => {
   try {
     const category = await CategoryModel.findById(req.params.id);
     if (!category) {
@@ -38,10 +32,9 @@ categoryRoutes.get("/:id", async (req, res) => {
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
-});
+};
 
-// Update a category by ID
-categoryRoutes.put("/:id", async (req, res) => {
+export const updateCategory = async (req, res) => {
   try {
     const { name, commits } = req.body;
     const updatedCategory = await CategoryModel.findByIdAndUpdate(
@@ -58,10 +51,9 @@ categoryRoutes.put("/:id", async (req, res) => {
   } catch (error) {
     res.status(400).json({ success: false, message: error.message });
   }
-});
+};
 
-// Delete a category by ID
-categoryRoutes.delete("/:id", async (req, res) => {
+export const deleteCategory = async (req, res) => {
   try {
     const deletedCategory = await CategoryModel.findByIdAndDelete(
       req.params.id
@@ -75,6 +67,4 @@ categoryRoutes.delete("/:id", async (req, res) => {
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
-});
-
-export default categoryRoutes;
+};
