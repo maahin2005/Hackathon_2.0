@@ -12,9 +12,9 @@ const JobSeekerSection = () => {
   
         {/* Right Side - Text Content */}
         <div className="w-full lg:w-1/2 flex flex-col justify-center text-center lg:text-left space-y-6 " data-aos="flip-left" >
-          <h2 className="text-4xl font-bold text-green-400">
+        <h2 className="text-4xl font-bold text-green-400 transition-colors duration-300 hover:text-green-600">
             🎯 Land Your Dream Job with Confidence!
-          </h2>
+        </h2>
           <p className="text-lg text-gray-300">
             Stand out from the crowd! Our AI-powered platform showcases your GitHub projects, contributions, and real-world skills to top recruiters. 🚀
           </p>
@@ -23,7 +23,10 @@ const JobSeekerSection = () => {
             <li>🔹 Showcase your GitHub contributions and real-world problem-solving ability.</li>
             <li>🔹 Let your projects speak louder than your resume!</li>
           </ul>
-          <button className="mt-4 px-6 py-3 text-lg font-semibold bg-green-500 hover:bg-green-600 rounded-lg transition-all">
+          <button className="mt-4 px-6 py-3 text-lg font-semibold  rounded-lg transition-all duration-500 ease-in-out 
+          border-transparent hover:border-green-400 bg-gradient-to-r from-green-700 via-green-600 to-green-700
+          hover:bg-gradient-to-r hover:from-green-800 hover:via-green-700 hover:to-green-900 
+          shadow-md shadow-green-500/50 border-2 hover:shadow-ld hover-shadow-green-500/40 ">
             🔥 Start Your Career Journey Now
           </button>
         </div>
