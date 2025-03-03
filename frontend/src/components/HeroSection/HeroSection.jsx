@@ -2,7 +2,7 @@ import { useState } from "react";
 
 const HeroSection = () => {
   const [activeRole, setActiveRole] = useState("recruiter");
-
+  const BASE_URL = import.meta.env.VITE_BACKEND_URL;
   const handleGithubLogin = () => {
     window.open(`${BASE_URL}/auth/github/callback`, "_self");
   };
