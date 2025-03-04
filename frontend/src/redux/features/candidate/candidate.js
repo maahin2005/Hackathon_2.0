@@ -1,71 +1,77 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  score: 0,
-  githubId: "",
-  githubUsername: "",
-  githubProfile: "",
-  candidateName: "",
-  email: "",
-  createdAt: "",
-  updatedAt: "",
   _id: "",
+  name: "",
+  email: "",
+  profileImage: "",
   bio: "",
   experienceInYear: 0,
   heading: "",
   areasOfExpertise: [],
+  githubId: "",
+  githubUsername: "",
+  githubProfile: "",
+  score: 0,
+  role: "", // "jobseeker" or "recruiter"
+  company: null, // Only for recruiters
+  createdAt: "",
+  updatedAt: "",
 };
 
-export const candidateSlice = createSlice({
-  name: "candidate",
+export const userSlice = createSlice({
+  name: "user",
   initialState,
   reducers: {
     setScore: (state, action) => {
       state.score = action.payload;
+    },
+    setUserData: (state, action) => {
+      const {
+        _id,
+        name,
+        email,
+        profileImage,
+        bio,
+        experienceInYear,
+        heading,
+        areasOfExpertise,
+        githubId,
+        githubUsername,
+        role,
+        company,
+        createdAt,
+        updatedAt,
+      } = action.payload;
+
+      state._id = _id;
+      state.name = name;
+      state.email = email;
+      state.profileImage = profileImage;
+      state.bio = bio;
+      state.experienceInYear = experienceInYear;
+      state.heading = heading;
+      state.areasOfExpertise = areasOfExpertise;
+      state.githubId = githubId;
+      state.githubUsername = githubUsername;
+      state.role = role;
+      state.company = company;
+      state.createdAt = createdAt;
+      state.updatedAt = updatedAt;
     },
 
     setGithubProfile: (state, action) => {
       const { githubId, githubUsername, profileImage } = action.payload;
       state.githubId = githubId;
       state.githubUsername = githubUsername;
-      state.githubProfile = profileImage;
-    },
-
-    setCandidateData: (state, action) => {
-      const {
-        name,
-        email,
-        createdAt,
-        updatedAt,
-        _id,
-        bio,
-        experienceInYear,
-        heading,
-        areasOfExpertise,
-      } = action.payload;
-
-      state.candidateName = name;
-      state.email = email;
-      state.createdAt = createdAt;
-      state.updatedAt = updatedAt;
-      state._id = _id;
-      state.bio = bio;
-      state.experienceInYear = experienceInYear;
-      state.heading = heading;
-      state.areasOfExpertise = areasOfExpertise;
+      state.profileImage = profileImage;
     },
 
     removeProfile: (state) => {
-      state.score = 0;
-      state.githubId = "";
-      state.githubUsername = "";
-      state.githubProfile = "";
-      state.candidateName = "";
-      state.email = "";
+      Object.assign(state, initialState); // Reset to initial state
     },
   },
 });
 
-export const { setScore, setGithubProfile, removeProfile, setCandidateData } =
-  candidateSlice.actions;
-export default candidateSlice.reducer;
+export const { setScore, setUserData, setGithubProfile, removeProfile } = userSlice.actions;
+export default userSlice.reducer;

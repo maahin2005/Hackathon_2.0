@@ -18,7 +18,8 @@ export const getAllCompanies = async (req, res) => {
 // Get a single company by ID
 export const getCompanyById = async (req, res) => {
   try {
-    const company = await CompanyModel.findById(req.params.id);
+    // const company = await CompanyModel.findById(req.params.id);
+    const company = await CompanyModel.find({ registeredBy: req.params.id });
     if (!company) {
       return res.status(404).json({ message: "Company not found" });
     }

@@ -4,9 +4,13 @@ import FetchScore from "../../Jobseeker/ImproveScore/ImproveScore";
 import CandidateGithubData from "./CandidateGithubData";
 import { FaEdit } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-const CandidateProfile = ({ candidate, isCandidate = false }) => {
+const CandidateProfile = ({ isCandidate = false }) => {
+  const candidate = useSelector((state) => state.user); // Ensure correct state selection
+  console.log(candidate)
   const { bio, experienceInYear, heading, areasOfExpertise } = candidate;
+  
 
   return (
     <div className="relative my-20 max-w-5xl mx-auto p-8 bg-white shadow-lg rounded-2xl border border-gray-200">
@@ -17,13 +21,13 @@ const CandidateProfile = ({ candidate, isCandidate = false }) => {
 
       <div className="flex flex-col sm:flex-row items-center gap-6 pb-6 border-b border-gray-200">
         <img
-          src={candidate.githubProfile || "https://github.com"}
-          alt={candidate.candidateName}
+          src={candidate.profileImage || "https://github.com"}
+          alt={candidate.name}
           className="w-32 h-32 rounded-full border-4 border-gray-200 shadow-md"
         />
         <div className="text-center sm:text-left">
           <h1 className="text-4xl font-extrabold text-gray-900">
-            {candidate.candidateName}
+            {candidate.name}
           </h1>
           <div className="flex flex-col sm:flex-row items-center gap-3 mt-2 text-gray-700">
             <a

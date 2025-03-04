@@ -3,46 +3,45 @@ import mongoose from "mongoose";
 const companySchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true,
+    // required: true,
     description: "The name of the company",
   },
   address: {
     street: {
       type: String,
-      required: true,
+      // required: true,
       description: "The street address of the company",
     },
     city: {
       type: String,
-      required: true,
+      // required: true,
       description: "The city where the company is located",
     },
     state: {
       type: String,
-      required: true,
+      // required: true,
       description: "The state where the company is located",
     },
     postalCode: {
       type: String,
-      required: true,
+      // required: true,
       description: "The postal code of the company's location",
     },
     country: {
       type: String,
-      required: true,
+      // required: true,
       description: "The country where the company is located",
     },
   },
   contact: {
     phone: {
       type: String,
-      required: true,
+      // required: true,
       description: "The phone number of the company",
     },
     email: {
       type: String,
-      required: true,
-      match: /.+\@.+\..+/,
+      // required: true,
       description: "The email address of the company",
     },
     website: {
@@ -52,7 +51,6 @@ const companySchema = new mongoose.Schema({
   },
   industry: {
     type: String,
-    required: true,
     description:
       "The industry in which the company operates. ex. IT, non-IT, etc",
   },

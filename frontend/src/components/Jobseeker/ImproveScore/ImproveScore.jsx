@@ -3,12 +3,13 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setScore } from "../../../redux/features/candidate/candidate";
 
-const FetchScore = ({ githubUsername }) => {
+const FetchScore = () => {
   const SCORE_BASE_URL = import.meta.env.VITE_SCORE_URL;
   const BASE_URL = import.meta.env.VITE_BACKEND_URL;
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
-  const userId = useSelector((state) => state.candidate._id);
+  const user = useSelector((state) => state.user);
+  console.log(user);
   const [repos, setRepos] = useState([]);
   const [categories, setCategories] = useState([]);
   const [selectedRepo, setSelectedRepo] = useState("");
@@ -18,7 +19,7 @@ const FetchScore = ({ githubUsername }) => {
   const fetchRepos = async () => {
     try {
       const response = await axios.get(
-        `https://api.github.com/users/${githubUsername}/repos`,
+        `https://api.github.com/users/${user.githubUsername}/repos`,
         {
           headers: {
             Authorization: `token ${import.meta.env.VITE_GITHUB_ACCESS_TOKEN}`,
@@ -50,9 +51,11 @@ const FetchScore = ({ githubUsername }) => {
     try {
       // API call
       const res = await axios.patch(`${BASE_URL}/jobseekers/update-score`, {
-        userId,
+        userId: user._id,
         score,
         categoryType,
+      }, {
+        withCredentials: true,
       });
 
       console.log("res.data", res.data);
@@ -65,7 +68,7 @@ const FetchScore = ({ githubUsername }) => {
     setLoading(true);
     try {
       const res = await axios.post(`${SCORE_BASE_URL}/compare/`, {
-        username: githubUsername,
+        username: user.githubUsername,
         repo: selectedRepo,
         standard_commits: standardCommits,
       });
