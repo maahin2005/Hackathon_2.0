@@ -3,6 +3,11 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const githubCallback = (req, res) => {
+  if (!req.user?.githubId) {
+    return res.redirect(
+      "http://localhost:5173/login?error=user%20already%20existed%20as%20recruiter%20try%20with%20google"
+    );
+  }
   const token = jwt.sign(
     { id: req.user.id, githubId: req.user.githubId, userRole: req.user.role },
     process.env.JWT_SECRET,

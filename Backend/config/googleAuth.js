@@ -15,29 +15,41 @@ passport.use(
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
+        const email = profile.emails?.[0]?.value || ""; // Safely get email
         let user = await UserModel.findOne({ googleId: profile.id });
-        // let user = await UserModel
+
+        if (!user && email) {
+          user = await UserModel.findOne({ email });
+        }
         if (!user) {
           user = new UserModel({
             name: profile.displayName,
-            email: profile.emails[0].value,
-            profileImage: profile.photos[0].value,
+            email: email || null, // Avoid empty email strings
+            profileImage: profile.photos?.[0]?.value || "", // Avoid undefined photo errors
             googleId: profile.id,
             role: "recruiter",
           });
 
           await user.save();
         }
+
         return done(null, user);
       } catch (err) {
+        console.error("Error in Google OAuth:", err);
         return done(err, null);
       }
     }
   )
 );
 
+// Serialize & Deserialize User
 passport.serializeUser((user, done) => done(null, user.id));
+
 passport.deserializeUser(async (id, done) => {
-  const user = await UserModel.findById(id);
-  done(null, user);
+  try {
+    const user = await UserModel.findById(id);
+    done(null, user);
+  } catch (err) {
+    done(err, null);
+  }
 });

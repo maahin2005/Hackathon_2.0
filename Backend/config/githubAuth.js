@@ -21,7 +21,9 @@ passport.use(
 
         // Check if user already exists
         let user = await UserModel.findOne({ githubId: profile.id });
-
+        if (!user && email) {
+          user = await UserModel.findOne({ email });
+        }
         if (!user) {
           user = new UserModel({
             name: profile.displayName || profile.username,
