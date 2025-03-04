@@ -1,76 +1,77 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import CandidateProfile from "./../../../components/Custom/JobseekerProfile/CandidateProfile";
+import CandidateProfile from "../../../components/Custom/JobseekerProfile/CandidateProfile";
 import {
-  setCandidateData,
+  setUserData,
   setGithubProfile,
   setScore,
 } from "../../../redux/features/candidate/candidate";
 
 function JobseekerDashboard() {
   const BASE_URL = import.meta.env.VITE_BACKEND_URL;
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
-  const candidate = useSelector((state) => state.candidate);
 
-  const getCandidateData = async () => {
-    setLoading(true);
-    try {
-      const res = await axios.get(`${BASE_URL}/jobseekers/me`, {
-        withCredentials: true,
-      });
+  useEffect(() => {
+    const getCandidateData = async () => {
+      try {
+        const { data } = await axios.get(`${BASE_URL}/jobseekers/me`, {
+          withCredentials: true,
+        });
 
-      if (res.data?.success) {
-        const {
-          createdAt,
-          updatedAt,
-          githubId,
-          githubUsername,
-          name,
-          profileImage,
-          score,
-          email,
-          _id,
-          bio,
-          experienceInYear,
-          heading,
-          areasOfExpertise,
-        } = res.data?.data;
-
-        dispatch(setGithubProfile({ githubId, githubUsername, profileImage }));
-        dispatch(
-          setCandidateData({
-            name,
-            email,
+        if (data?.success && data?.data) {
+          const {
             createdAt,
             updatedAt,
+            githubId,
+            githubUsername,
+            name,
+            profileImage,
+            score,
+            email,
             _id,
             bio,
             experienceInYear,
             heading,
             areasOfExpertise,
-          })
-        );
-        dispatch(setScore(score));
-      }
-    } catch (error) {
-      console.error("Error fetching candidate data:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+          } = data.data;
 
-  useEffect(() => {
+          // dispatch(setGithubProfile({ githubId, githubUsername, profileImage }));
+          dispatch(
+            setUserData({
+              name,
+              email,
+              createdAt,
+              updatedAt,
+              _id,
+              bio,
+              experienceInYear,
+              heading,
+              areasOfExpertise,
+              githubId,
+              githubUsername,
+              profileImage
+            })
+          );
+          dispatch(setScore(score));
+        }
+      } catch (error) {
+        console.error("Error fetching candidate data:", error.response?.data || error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
     getCandidateData();
-  }, [dispatch]);
+  }, [BASE_URL, dispatch]); // Dependency array
 
   return (
     <div>
       {loading ? (
-        "Loading..."
+        <p>Loading...</p>
       ) : (
-        <CandidateProfile candidate={candidate} isCandidate={true} />
+        <CandidateProfile isCandidate={true} />
       )}
     </div>
   );
