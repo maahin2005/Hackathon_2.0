@@ -7,20 +7,20 @@ const HeroSection = () => {
   const [activeRole, setActiveRole] = useState("recruiter");
   const BASE_URL = import.meta.env.VITE_BACKEND_URL;
   const { isAuthenticated } = useSelector((state) => state.auth);
-  const naviagate = useNavigate();
+  const navigate = useNavigate();
   const handleGithubLogin = () => {
     if (!isAuthenticated) {
       window.open(`${BASE_URL}/auth/github/callback`, "_self");
     }
 
-    naviagate("/jobseeker/dashboard");
+    navigate("/jobseeker/dashboard");
   };
 
   const handleGoogleLogin = () => {
     if (!isAuthenticated) {
       window.location.href = `${BASE_URL}/auth/google`;
     }
-    naviagate("/recruiter/dashboard");
+    navigate("/recruiter/dashboard");
   };
 
   return (

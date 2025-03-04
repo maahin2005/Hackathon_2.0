@@ -17,6 +17,7 @@ import cookieParser from "cookie-parser";
 import jobseekerRoute from "./routes/jobseeker.route.js";
 import verifyJobseeker from "./middlewares/verifyJobseeker.middleware.js";
 import verifyRecruiter from "./middlewares/verifyRecruiter.middleware.js";
+import emailRoute from "./routes/email.route.js";
 dotenv.config();
 
 const PORT = process.env.PORT || 8080;
@@ -45,6 +46,7 @@ app.use(passport.session());
 app.use("/auth", authRoutes);
 app.use("/users", userRoute);
 app.use("/github", githubRoute);
+app.use("/mail", emailRoute);
 
 app.use("/categories", auth, categoryRoutes);
 app.use("/companies", auth, companyRoutes);
