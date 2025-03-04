@@ -13,7 +13,7 @@ const checkAuth = () => {
 const initialState = {
   isAuthenticated: checkAuth(),
   token: token || null,
-  role: decoded.success ? decoded.data.userRole : null,
+  role: decoded?.success ? decoded.data.userRole : null,
 };
 
 export const authSlice = createSlice({

@@ -1,4 +1,5 @@
 import CompanyModel from "../../models/Company.model.js";
+import UserModel from "../../models/User.js";
 
 // Get all companies
 export const getAllCompanies = async (req, res) => {
@@ -33,13 +34,37 @@ export const getCompanyById = async (req, res) => {
 
 // Create a new company
 export const createCompany = async (req, res) => {
+  const { googleId } = req.user;
+
   try {
-    const newCompany = new CompanyModel(req.body);
+    // Find the recruiter by googleId
+    const recruiter = await UserModel.findOne({ googleId });
+    if (!recruiter) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Recruiter not found" });
+    }
+
+    // Create a new company with the recruiter's _id as registeredBy
+    const newCompany = new CompanyModel({
+      ...req.body, // Spread the request body
+      registeredBy: recruiter._id, // Add the registeredBy field
+    });
+
+    // Save the new company
     await newCompany.save();
+
+    // Update the recruiter's document to reference the new company
+    await UserModel.findByIdAndUpdate(recruiter._id, {
+      company: newCompany._id,
+    });
+
+    // Send success response
     res
       .status(201)
       .json({ success: true, message: "Company saved successfully" });
   } catch (error) {
+    // Handle errors
     res.status(400).json({ success: false, message: error.message });
   }
 };

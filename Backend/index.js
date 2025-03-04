@@ -47,7 +47,7 @@ app.use("/users", userRoute);
 app.use("/github", githubRoute);
 
 app.use("/categories", auth, categoryRoutes);
-app.use("/companies", auth, verifyRecruiter, companyRoutes);
+app.use("/companies", auth, companyRoutes);
 app.use("/jobseekers", auth, verifyJobseeker, jobseekerRoute);
 app.use("/recruiters", auth, verifyRecruiter, recruiterRoutes);
 app.get("/", (_, res) => {

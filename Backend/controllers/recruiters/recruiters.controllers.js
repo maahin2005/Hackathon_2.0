@@ -43,7 +43,7 @@ export const meRecruiter = async (req, res) => {
   const { googleId } = req.user;
 
   try {
-    const user = await UserModel.findOne({ googleId });
+    const user = await UserModel.findOne({ googleId }).populate("company");
 
     if (!user) {
       return res.status(404).json({ message: "Recruiter not found" });

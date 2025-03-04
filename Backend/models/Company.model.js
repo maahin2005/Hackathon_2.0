@@ -76,6 +76,13 @@ const companySchema = new mongoose.Schema({
     type: [String],
     description: "Tags associated with the company",
   },
+
+  registeredBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    require: true,
+    unique: true,
+  },
 });
 
 const CompanyModel = mongoose.model("Company", companySchema);

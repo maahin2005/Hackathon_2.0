@@ -20,6 +20,11 @@ const userSchema = new mongoose.Schema(
       enum: ["jobseeker", "recruiter"],
       required: true,
     },
+    company: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Company",
+      default: null,
+    },
   },
   { timestamps: true }
 );
