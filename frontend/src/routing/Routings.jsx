@@ -8,6 +8,7 @@ import HireTalents from "./../Pages/recruiter/hireTalent/HireTalents";
 import JobseekerDashboard from "./../Pages/jobseeker/Dashboard/JobseekerDashboard";
 import TalentProfile from "./../Pages/recruiter/hireTalent/TalentProfile";
 import RecruiterDashboard from "./../Pages/recruiter/dashboard/RecruiterDashboard";
+import ProfileUdpateForm from "../Pages/jobseeker/ProfileUpdateForm";
 function Routings() {
   return (
     <Routes>
@@ -19,6 +20,14 @@ function Routings() {
         element={
           <ProtectedJobseekerRoutes>
             <JobseekerDashboard />
+          </ProtectedJobseekerRoutes>
+        }
+      />
+      <Route
+        path="/jobseeker/profile/edit"
+        element={
+          <ProtectedJobseekerRoutes>
+            <ProfileUdpateForm />
           </ProtectedJobseekerRoutes>
         }
       />

@@ -13,7 +13,7 @@ const HeroSection = () => {
       window.open(`${BASE_URL}/auth/github/callback`, "_self");
     }
 
-    naviagate("/jobseekers/dashboard");
+    naviagate("/jobseeker/dashboard");
   };
 
   const handleGoogleLogin = () => {

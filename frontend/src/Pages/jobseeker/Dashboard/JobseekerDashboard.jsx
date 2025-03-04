@@ -32,10 +32,26 @@ function JobseekerDashboard() {
           score,
           email,
           _id,
+          bio,
+          experienceInYear,
+          heading,
+          areasOfExpertise,
         } = res.data?.data;
 
         dispatch(setGithubProfile({ githubId, githubUsername, profileImage }));
-        dispatch(setCandidateData({ name, email, createdAt, updatedAt, _id }));
+        dispatch(
+          setCandidateData({
+            name,
+            email,
+            createdAt,
+            updatedAt,
+            _id,
+            bio,
+            experienceInYear,
+            heading,
+            areasOfExpertise,
+          })
+        );
         dispatch(setScore(score));
       }
     } catch (error) {
@@ -51,7 +67,11 @@ function JobseekerDashboard() {
 
   return (
     <div>
-      {loading ? "Loading..." : <CandidateProfile candidate={candidate} />}
+      {loading ? (
+        "Loading..."
+      ) : (
+        <CandidateProfile candidate={candidate} isCandidate={true} />
+      )}
     </div>
   );
 }

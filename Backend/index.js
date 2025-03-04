@@ -1,7 +1,6 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-// import axios from "axios";
 import connectDB from "./config/db.js";
 import authRoutes from "./routes/auth.js";
 import passport from "passport";
@@ -22,7 +21,6 @@ dotenv.config();
 
 const PORT = process.env.PORT || 8080;
 const MongoDB = process.env.MONGODB_URL;
-// const GITHUB_ACCESS_TOKEN = process.env.GITHUB_ACCESS_TOKEN;
 
 const app = express();
 
@@ -55,37 +53,6 @@ app.use("/recruiters", auth, verifyRecruiter, recruiterRoutes);
 app.get("/", (_, res) => {
   res.status(200).json({ status: "Server is healthy! Enjoy............" });
 });
-
-// app.get("/github/:username", async (req, res) => {
-//   try {
-//     const username = req.params.username;
-
-//     // Fetch user profile
-//     const userResponse = await axios.get(
-//       `https://api.github.com/users/${username}`,
-//       {
-//         headers: { Authorization: `token ${GITHUB_ACCESS_TOKEN}` },
-//       }
-//     );
-
-//     // Fetch repos
-//     const reposResponse = await axios.get(
-//       `https://api.github.com/users/${username}/repos`,
-//       {
-//         headers: { Authorization: `token ${GITHUB_ACCESS_TOKEN}` },
-//       }
-//     );
-
-//     res.json({
-//       profile: userResponse.data,
-//       repos: reposResponse.data,
-//     });
-//   } catch (error) {
-//     res
-//       .status(500)
-//       .json({ error: "Error fetching GitHub data", msg: error.message });
-//   }
-// });
 
 app.listen(PORT, async () => {
   try {

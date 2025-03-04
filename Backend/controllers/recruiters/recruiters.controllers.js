@@ -38,3 +38,23 @@ export const selectedCandidate = async (req, res) => {
       .json({ message: error.message, success: false, error: true });
   }
 };
+
+export const meRecruiter = async (req, res) => {
+  const { googleId } = req.user;
+
+  try {
+    const user = await UserModel.findOne({ googleId });
+
+    if (!user) {
+      return res.status(404).json({ message: "Recruiter not found" });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Recruiter data found successfully",
+      data: user,
+    });
+  } catch (error) {
+    return res.status(500).json({ success: false, message: error.message });
+  }
+};

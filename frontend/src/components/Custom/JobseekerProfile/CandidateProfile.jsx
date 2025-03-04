@@ -1,85 +1,97 @@
 import React from "react";
-import { FaGithub, FaEnvelope } from "react-icons/fa";
-import FetchScore from "./../../Jobseeker/ImproveScore/ImproveScore";
+import { FaEnvelope, FaGithub } from "react-icons/fa";
+import FetchScore from "../../Jobseeker/ImproveScore/ImproveScore";
+import CandidateGithubData from "./CandidateGithubData";
+import { FaEdit } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
-const CandidateProfile = ({ candidate }) => {
+const CandidateProfile = ({ candidate, isCandidate = false }) => {
+  const { bio, experienceInYear, heading, areasOfExpertise } = candidate;
+
   return (
-    <div className="my-20 max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">
+    <div className="relative my-20 max-w-5xl mx-auto p-8 bg-white shadow-lg rounded-2xl border border-gray-200">
       {/* Header Section */}
-      <div className="flex items-center gap-6">
+      <Link to="/jobseeker/profile/edit">
+        <FaEdit className="absolute top-3 right-3 text-3xl cursor-pointer" />
+      </Link>
+
+      <div className="flex flex-col sm:flex-row items-center gap-6 pb-6 border-b border-gray-200">
         <img
           src={candidate.githubProfile || "https://github.com"}
           alt={candidate.candidateName}
-          className="w-32 h-32 rounded-full border"
+          className="w-32 h-32 rounded-full border-4 border-gray-200 shadow-md"
         />
-        <div>
-          <h1 className="text-4xl font-bold text-gray-800">
+        <div className="text-center sm:text-left">
+          <h1 className="text-4xl font-extrabold text-gray-900">
             {candidate.candidateName}
           </h1>
-          {/* <p className="text-gray-600 capitalize">{candidate.role}</p> */}
-          <div className="flex items-center gap-3 mt-2">
+          <div className="flex flex-col sm:flex-row items-center gap-3 mt-2 text-gray-700">
             <a
               href={`mailto:${candidate.email}`}
-              className="text-gray-600 hover:text-gray-900 flex items-center gap-1"
+              className="flex items-center gap-2 hover:text-gray-900 transition-colors"
             >
-              <FaEnvelope /> {candidate.email}
+              <FaEnvelope className="w-5 h-5" /> {candidate.email}
             </a>
             <a
-              href={`https://github.com/${candidate?.githubUsername}`}
+              href={`https://github.com/${candidate.githubUsername}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-600 hover:text-gray-900 flex items-center gap-1"
+              className="flex items-center gap-2 hover:text-gray-900 transition-colors"
             >
-              <FaGithub />
-              {candidate?.githubUsername}
+              <FaGithub className="w-5 h-5" /> {candidate.githubUsername}
             </a>
           </div>
+          <p className="mt-3 text-gray-600 text-lg font-medium">{heading}</p>
         </div>
       </div>
 
-      {/* Score Section */}
-      <div className="mt-6 p-4 bg-gray-100 rounded-md">
-        <h2 className="text-lg font-semibold">Score</h2>
-        <p className="text-xl font-bold">{candidate.score}</p>
-      </div>
-
-      {/* FetchScore Component */}
-      {candidate?.githubUsername && (
-        <FetchScore githubUsername={candidate?.githubUsername} />
+      {/* BIO Section */}
+      {bio && (
+        <div className="my-6 text-center">
+          <h2 className="text-2xl font-semibold text-gray-900">About Me</h2>
+          <p className="text-gray-700 mt-2 text-lg">{bio}</p>
+        </div>
       )}
 
-      {/* Top Repositories Section */}
-      <div className="mt-6">
-        <h2 className="text-lg font-semibold">Top Repositories</h2>
-        {candidate.topRepos?.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-3">
-            {candidate.topRepos.map((repo, index) => (
-              <div
+      {/* Experience Section */}
+      {experienceInYear > 0 && (
+        <div className="my-6">
+          <h2 className="text-2xl font-semibold text-gray-900">Experience</h2>
+          <p className="text-gray-700 text-lg">
+            {experienceInYear} years of experience
+          </p>
+        </div>
+      )}
+
+      {/* Score Section */}
+      <div className="mt-8 p-6 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg text-white text-center shadow-md">
+        <h2 className="text-xl font-semibold">Github Standard Commits Score</h2>
+        <p className="text-4xl font-bold mt-2">{candidate.score}</p>
+      </div>
+      {/* Areas of Expertise */}
+      {areasOfExpertise?.length > 0 && (
+        <div className="mt-6">
+          <h2 className="text-2xl font-semibold text-gray-900">
+            Areas of Expertise
+          </h2>
+          <div className="flex flex-wrap gap-2 mt-2">
+            {areasOfExpertise.map((expertise, index) => (
+              <span
                 key={index}
-                className="p-4 border rounded-md shadow-sm bg-gray-50"
+                className="bg-blue-600 text-white text-sm px-3 py-1 rounded-full shadow-md"
               >
-                <h3 className="font-semibold text-gray-800">{repo.name}</h3>
-                <p className="text-gray-600">
-                  {repo.description || "No description available"}
-                </p>
-                <a
-                  href={repo.html_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-600 hover:underline mt-2 inline-block"
-                >
-                  View Repository
-                </a>
-              </div>
+                {expertise}
+              </span>
             ))}
           </div>
-        ) : (
-          <p className="text-gray-500 mt-2">No repositories available</p>
-        )}
-      </div>
+        </div>
+      )}
+
+      {isCandidate && <FetchScore githubUsername={candidate.githubUsername} />}
+      <CandidateGithubData githubUsername={candidate.githubUsername} />
 
       {/* Created & Updated At Section */}
-      <div className="mt-6 text-gray-500 text-sm">
+      <div className="mt-8 pt-6 border-t border-gray-200 text-gray-500 text-sm">
         <p>Created at: {new Date(candidate.createdAt).toLocaleString()}</p>
         <p>Last updated: {new Date(candidate.updatedAt).toLocaleString()}</p>
       </div>

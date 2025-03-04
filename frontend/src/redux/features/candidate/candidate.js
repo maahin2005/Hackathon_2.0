@@ -10,6 +10,10 @@ const initialState = {
   createdAt: "",
   updatedAt: "",
   _id: "",
+  bio: "",
+  experienceInYear: 0,
+  heading: "",
+  areasOfExpertise: [],
 };
 
 export const candidateSlice = createSlice({
@@ -28,13 +32,27 @@ export const candidateSlice = createSlice({
     },
 
     setCandidateData: (state, action) => {
-      const { name, email, createdAt, updatedAt, _id } = action.payload;
+      const {
+        name,
+        email,
+        createdAt,
+        updatedAt,
+        _id,
+        bio,
+        experienceInYear,
+        heading,
+        areasOfExpertise,
+      } = action.payload;
 
       state.candidateName = name;
       state.email = email;
       state.createdAt = createdAt;
       state.updatedAt = updatedAt;
       state._id = _id;
+      state.bio = bio;
+      state.experienceInYear = experienceInYear;
+      state.heading = heading;
+      state.areasOfExpertise = areasOfExpertise;
     },
 
     removeProfile: (state) => {
