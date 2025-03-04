@@ -4,6 +4,7 @@ import axios from "axios";
 import Footer from "./../../../components/Custom/Footer/Footer";
 import CandidateCard from "./../../../components/Jobseeker/candidateCard/CandidateCard";
 import FilterHeader from "./../../../components/Recruiter/FilterHeader/FilterHeader";
+// import Footer from "./../../../components/Custom/Footer/Footer";
 
 const HireTalents = () => {
   const backendBaseUrl = import.meta.env.VITE_BACKEND_URL;
@@ -30,22 +31,26 @@ const HireTalents = () => {
 
   return (
     <>
-      <div className="container mx-auto my-5 md:my-14 px-4 py-8">
-        <h1 className="text-5xl text-blue-950 tracking-wide font-[Kanit] font-semibold my-8 text-center">
-          Top Talentad Candidates
-        </h1>
-        <FilterHeader />
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mx-5 py-6">
-          {" "}
-          {jobseekers.map((candidate) => (
-            <CandidateCard key={candidate._id} candidate={candidate} />
-          ))}
-        </div>
+      <div className="container mx-auto my-5 md:my-14 px-4 py-8 flex flex-col min-h-screen">
+        {/* Main Content */}
+        <main className="flex-grow">
+          <h1 className="text-5xl text-blue-950 tracking-wide font-[Kanit] font-semibold my-8 text-center">
+            Top Talented Candidates
+          </h1>
+          <FilterHeader />
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-8 mx-5 py-6">
+            {jobseekers.map((candidate) => (
+              <CandidateCard key={candidate._id} candidate={candidate} />
+            ))}
+          </div>
+        </main>
+  
+        {/* Footer (Sticks to Bottom) */}
+        <Footer />
       </div>
-      <Footer />
     </>
   );
-};
+  };
 
 HireTalents.propTypes = {
   props: PropTypes.any,

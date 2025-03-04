@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import Navbar from "../../components/Custom/Navbar/Navbar";
+import Footer from "../../components/Custom/Footer/Footer";
 
-const ContactPage = () => {
+const Contact = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -48,68 +50,75 @@ const ContactPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-900 p-6">
-      <div className="bg-white p-8 rounded-lg shadow-xl max-w-lg w-full">
-        <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">Contact Us</h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label className="block text-gray-700 font-semibold">Name:</label>
-            <input
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-            />
-            {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
-          </div>
+    <div className="min-h-screen flex flex-col">
+        <Navbar/>
+      {/* Main Content */}
+      <main className="flex-grow flex items-center justify-center bg-gray-900 p-6 pt-30 pb-30">
+        <div className="bg-white p-8 rounded-lg shadow-xl max-w-lg w-full">
+          <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">Contact Us</h2>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label className="block text-gray-700 font-semibold">Name:</label>
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+              />
+              {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
+            </div>
 
-          <div>
-            <label className="block text-gray-700 font-semibold">Email:</label>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-            />
-            {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
-          </div>
+            <div>
+              <label className="block text-gray-700 font-semibold">Email:</label>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+              />
+              {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
+            </div>
 
-          <div>
-            <label className="block text-gray-700 font-semibold">Phone:</label>
-            <input
-              type="tel"
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-            />
-            {errors.phone && <p className="text-red-500 text-sm">{errors.phone}</p>}
-          </div>
+            <div>
+              <label className="block text-gray-700 font-semibold">Phone:</label>
+              <input
+                type="tel"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+              />
+              {errors.phone && <p className="text-red-500 text-sm">{errors.phone}</p>}
+            </div>
 
-          <div>
-            <label className="block text-gray-700 font-semibold">Message:</label>
-            <textarea
-              name="message"
-              value={formData.message}
-              onChange={handleChange}
-              className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-              rows="4"
-            ></textarea>
-          </div>
+            <div>
+              <label className="block text-gray-700 font-semibold">Message:</label>
+              <textarea
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                rows="4"
+              ></textarea>
+            </div>
 
-          <button
-            type="submit"
-            className="w-full bg-blue-600 text-white font-bold py-2 rounded-lg hover:bg-blue-700 transition disabled:bg-gray-400"
-            disabled={Object.keys(errors).length > 0}
-          >
-            Submit
-          </button>
-        </form>
-      </div>
+            <button
+              type="submit"
+              className="w-full bg-blue-600 text-white font-bold py-2 rounded-lg hover:bg-blue-700 transition disabled:bg-gray-400"
+              disabled={Object.keys(errors).length > 0}
+            >
+              Submit
+            </button>
+          </form>
+        </div>
+      </main>
+
+      {/* Footer (Sticks to Bottom) */}
+      <Footer />
     </div>
   );
 };
 
-export default ContactPage;
+export default Contact;

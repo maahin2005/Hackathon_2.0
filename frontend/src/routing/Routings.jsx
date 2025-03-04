@@ -9,11 +9,16 @@ import JobseekerDashboard from "./../Pages/jobseeker/Dashboard/JobseekerDashboar
 import TalentProfile from "./../Pages/recruiter/hireTalent/TalentProfile";
 import RecruiterDashboard from "./../Pages/recruiter/dashboard/RecruiterDashboard";
 import ProfileUdpateForm from "../Pages/jobseeker/ProfileUpdateForm";
+import About from '../Pages/About/About.jsx'
+import ContactUs from '../Pages/Contact us/Contact.jsx'
+
 function Routings() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/about" element={<About />} /> {/* About Page Route */}
+      <Route path="/contactus" element={<ContactUs />} /> {/* Contact Us Page Route */}
 
       <Route
         path="/jobseeker/dashboard"

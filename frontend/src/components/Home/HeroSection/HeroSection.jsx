@@ -1,5 +1,5 @@
 import { useState } from "react";
-import starsBackground from "../../.././assets/stars.jpg";
+import starsBackground from "../../../assets/stars.jpg";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -7,25 +7,25 @@ const HeroSection = () => {
   const [activeRole, setActiveRole] = useState("recruiter");
   const BASE_URL = import.meta.env.VITE_BACKEND_URL;
   const { isAuthenticated } = useSelector((state) => state.auth);
-  const naviagate = useNavigate();
+  const navigate = useNavigate();
+
   const handleGithubLogin = () => {
     if (!isAuthenticated) {
       window.open(`${BASE_URL}/auth/github/callback`, "_self");
     }
-
-    naviagate("/jobseeker/dashboard");
+    navigate("/jobseeker/dashboard");
   };
 
   const handleGoogleLogin = () => {
     if (!isAuthenticated) {
       window.location.href = `${BASE_URL}/auth/google`;
     }
-    naviagate("/recruiter/dashboard");
+    navigate("/recruiter/dashboard");
   };
 
   return (
     <div
-      className="w-full h-screen flex flex-col md:flex-row items-center justify-around text-white p-8"
+      className="w-full min-h-screen flex flex-col md:flex-row items-center justify-between text-white p-6 md:p-8 overflow-hidden"
       style={{
         backgroundImage: `url(${starsBackground})`,
         backgroundSize: "cover",
@@ -34,93 +34,75 @@ const HeroSection = () => {
         backgroundAttachment: "fixed",
       }}
     >
-      <div className="w-full md:w-1/3 flex flex-col items-center gap-6">
-        {/* Heading */}
-        <h2 className="text-2xl font-bold text-center text-white">
+      {/* Left Section */}
+      <div className="w-full md:w-1/3 flex flex-col items-center gap-4 md:gap-6">
+        <h2 className="text-xl md:text-2xl font-bold text-center">
           Connecting Talent with Opportunity
         </h2>
 
-        {/* Quote Section */}
-        <p className="text-gray-200  text-4xl font-[Kanit] text-center italic">
+        <p className="text-gray-200 text-2xl md:text-4xl font-[Kanit] text-center italic">
           {activeRole === "recruiter"
             ? "Great hires build great companies."
             : "Your next opportunity is just a step away."}
         </p>
 
-        {/* Recruiter Button */}
         <button
           onMouseEnter={() => setActiveRole("recruiter")}
-          className={`w-full md:w-80 cursor-pointer px-6 py-2 text-xl font-semibold border-2 rounded-3xl transition-all duration-500 ease-in-out ${
+          className={`w-full md:w-64 cursor-pointer px-4 py-2 text-base md:text-lg font-semibold border-2 rounded-3xl transition-all duration-500 ${
             activeRole === "recruiter"
-              ? "border-blue-600 text-white bg-gradient-to-r from-blue-700 via-blue-600 to-blue-800 shadow-lg shadow-blue-500/50"
-              : "border-gray-600 text-gray-300 hover:border-blue-500 hover:text-blue-400 hover:bg-gradient-to-r hover:from-gray-800 hover:via-gray-700 hover:to-gray-900 hover:shadow-lg hover:shadow-blue-500/40"
+              ? "border-blue-600 bg-blue-700 text-white shadow-lg"
+              : "border-gray-600 text-gray-300 hover:border-blue-500 hover:text-blue-400"
           }`}
         >
           I'm a Recruiter
         </button>
 
-        {/* Job Seeker Button */}
         <button
           onMouseEnter={() => setActiveRole("jobseeker")}
-          className={`w-full md:w-80 cursor-pointer px-6 py-2 text-xl font-semibold border-2 rounded-3xl transition-all duration-500 ease-in-out ${
+          className={`w-full md:w-64 cursor-pointer px-4 py-2 text-base md:text-lg font-semibold border-2 rounded-3xl transition-all duration-500 ${
             activeRole === "jobseeker"
-              ? "border-green-600 text-white bg-gradient-to-r from-green-700 via-green-600 to-green-800 shadow-lg shadow-green-500/50"
-              : "border-gray-600 text-gray-300 hover:border-green-500 hover:text-green-400 hover:bg-gradient-to-r hover:from-gray-800 hover:via-gray-700 hover:to-gray-900 hover:shadow-lg hover:shadow-green-500/40"
+              ? "border-green-600 bg-green-700 text-white shadow-lg"
+              : "border-gray-600 text-gray-300 hover:border-green-500 hover:text-green-400"
           }`}
         >
           I'm a Job Seeker
         </button>
       </div>
 
-      {/* Info Section */}
+      {/* Right Section */}
       <div
-        className={`w-full md:w-1/2 min-h-80 h-[70vh] mt-10  flex flex-col items-center justify-center text-center p-5 shadow-lg transition-all duration-700 ease-in-out bg-gradient-to-br  backdrop-blur-md ${
+        className={`w-full md:w-1/2 min-h-[50vh] md:min-h-[65vh] flex flex-col items-center justify-center text-center p-6 md:p-12 shadow-lg overflow-auto transition-all duration-700 bg-gradient-to-br rounded-xl ${
           activeRole === "recruiter"
-            ? "from-blue-800 via-blue-700 to-blue-950 "
-            : "from-green-800 via-green-700 to-green-950 "
+            ? "from-blue-800 via-blue-700 to-blue-950"
+            : "from-green-800 via-green-700 to-green-950"
         }`}
       >
         {activeRole === "recruiter" ? (
-          <div className="px-3 bg-gradient-to-br from-gray-900 via-gray-800 to-black border-gray-700 backdrop-blur-md w-[95%] h-[95%] flex flex-col items-center gap-3 justify-center text-center rounded-xl">
-            <h1 className="text-3xl tracking-wide md:text-5xl font-[Kanit] text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700">
+          <div className="p-6 md:p-8 bg-gray-900 border-gray-700 w-full h-full flex flex-col items-center gap-4 justify-center text-center rounded-lg">
+            <h1 className="text-2xl md:text-4xl font-[Kanit] text-blue-400">
               Find & Hire Top Talent Effortlessly!
             </h1>
-
-            <p className="mt-4 text-lg md:text-xl text-gray-200 max-w-2xl mx-auto">
-              Unlock a world of skilled professionals and build your dream team
-              with ease. Let us connect you with the best candidates in the
-              industry.
+            <p className="text-gray-200 text-sm md:text-lg max-w-2xl mx-auto">
+              Unlock a world of skilled professionals and build your dream team with ease.
             </p>
-
             <button
               onClick={handleGoogleLogin}
-              className="cursor-pointer mt-6 px-8 py-3 text-lg md:text-xl font-semibold rounded-full transition-all duration-500 
-              bg-gradient-to-r from-blue-700 via-blue-600 to-blue-800 text-white 
-              shadow-lg shadow-blue-500/50 border-2 border-transparent 
-              hover:bg-gradient-to-r hover:from-blue-800 hover:via-blue-700 hover:to-blue-900 
-              hover:shadow-2xl hover:shadow-blue-500/40 hover:border-blue-400 scale-105 hover:scale-110"
+              className="cursor-pointer px-4 py-1 text-sm md:text-md font-semibold rounded-full transition-all duration-500 bg-blue-700 text-white shadow-lg"
             >
               Get Started!
             </button>
           </div>
         ) : (
-          <div className="px-3 bg-gradient-to-br from-gray-900 via-gray-800 to-black border-gray-700 backdrop-blur-md w-[95%] h-[95%] flex flex-col items-center gap-3 justify-center text-center rounded-xl">
-            <h1 className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-green-500 via-green-600 to-green-700">
+          <div className="p-6 md:p-8 bg-gray-900 border-gray-700 w-full h-full flex flex-col items-center gap-4 justify-center text-center rounded-lg">
+            <h1 className="text-2xl md:text-4xl font-extrabold text-green-400">
               Land Your Dream Job Today!
             </h1>
-
-            <p className="mt-4 text-lg md:text-xl text-gray-200 max-w-2xl mx-auto">
-              Discover exciting opportunities, apply to top companies, and take
-              the next big leap in your career. Your future starts here!
+            <p className="text-gray-200 text-sm md:text-lg max-w-2xl mx-auto">
+              Discover exciting opportunities, apply to top companies, and take the next big leap in your career.
             </p>
-
             <button
               onClick={handleGithubLogin}
-              className="cursor-pointer mt-6 px-8 py-3 text-lg md:text-xl font-semibold rounded-full transition-all duration-500 
-              bg-gradient-to-r from-green-700 via-green-600 to-green-800 text-white 
-              shadow-lg shadow-green-500/50 border-2 border-transparent 
-              hover:bg-gradient-to-r hover:from-green-800 hover:via-green-700 hover:to-green-900 
-              hover:shadow-2xl hover:shadow-green-500/40 hover:border-green-400 scale-105 hover:scale-110"
+              className="cursor-pointer px-4 py-1 text-sm md:text-md font-semibold rounded-full transition-all duration-500 bg-green-700 text-white shadow-lg"
             >
               Explore Jobs 🌟
             </button>
