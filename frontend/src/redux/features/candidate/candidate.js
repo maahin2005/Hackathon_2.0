@@ -11,7 +11,6 @@ const initialState = {
   areasOfExpertise: [],
   githubId: "",
   githubUsername: "",
-  githubProfile: "",
   score: 0,
   role: "", // "jobseeker" or "recruiter"
   company: null, // Only for recruiters
@@ -60,18 +59,11 @@ export const userSlice = createSlice({
       state.updatedAt = updatedAt;
     },
 
-    setGithubProfile: (state, action) => {
-      const { githubId, githubUsername, profileImage } = action.payload;
-      state.githubId = githubId;
-      state.githubUsername = githubUsername;
-      state.profileImage = profileImage;
-    },
-
     removeProfile: (state) => {
       Object.assign(state, initialState); // Reset to initial state
     },
   },
 });
 
-export const { setScore, setUserData, setGithubProfile, removeProfile } = userSlice.actions;
+export const { setScore, setUserData, removeProfile } = userSlice.actions;
 export default userSlice.reducer;

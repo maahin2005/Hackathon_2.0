@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import CandidateProfile from "../../../components/Custom/JobseekerProfile/CandidateProfile";
 import {
   setUserData,
-  setGithubProfile,
   setScore,
 } from "../../../redux/features/candidate/candidate";
 
@@ -37,7 +36,6 @@ function JobseekerDashboard() {
             areasOfExpertise,
           } = data.data;
 
-          // dispatch(setGithubProfile({ githubId, githubUsername, profileImage }));
           dispatch(
             setUserData({
               name,

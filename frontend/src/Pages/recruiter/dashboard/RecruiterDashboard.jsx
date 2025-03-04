@@ -7,7 +7,7 @@ function RecruiterDashboard() {
   const BASE_URL = import.meta.env.VITE_BACKEND_URL;
   const recruiter = useSelector((state) => state.user);
   const dispatch = useDispatch();
-
+// console.log(recruiter)
   const [showCompanyForm, setShowCompanyForm] = useState(false);
   const [editingCompanyId, setEditingCompanyId] = useState(null);
   const [companies, setCompanies] = useState([]);
@@ -25,13 +25,14 @@ function RecruiterDashboard() {
         const { data } = await axios.get(`${BASE_URL}/recruiters/me`, {
           withCredentials: true,
         });
+        // console.log("User:", data.data)
         dispatch(setUserData(data.data));
       } catch (error) {
         console.error("Error fetching user:", error);
       }
     };
     fetchUser();
-  }, []);
+  }, [dispatch]);
 
   // Fetch all companies
   useEffect(() => {
@@ -98,7 +99,7 @@ function RecruiterDashboard() {
         <div className="bg-gradient-to-r from-blue-500 to-purple-600 h-32 relative">
           <img
             className="absolute -bottom-12 left-1/2 transform -translate-x-1/2 w-36 h-36 rounded-full border-4 border-white shadow-lg"
-            src={recruiter.profileImage || "https://via.placeholder.com/150"}
+            src={recruiter?.profileImage}
             alt="Recruiter Profile"
           />
         </div>
