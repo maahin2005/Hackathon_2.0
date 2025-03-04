@@ -1,8 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import Cookies from "js-cookie";
+import { decodeToken } from "../../../utils/decodeToken";
 
 // Helper function to check if token exists in cookies
 const token = Cookies.get("token");
+const decoded = decodeToken(token);
+
 const checkAuth = () => {
   return !!token; // Returns true if token exists, false otherwise
 };
@@ -10,6 +13,7 @@ const checkAuth = () => {
 const initialState = {
   isAuthenticated: checkAuth(),
   token: token || null,
+  role: decoded.success ? decoded.data.userRole : null,
 };
 
 export const authSlice = createSlice({
@@ -23,6 +27,7 @@ export const authSlice = createSlice({
       Cookies.remove("token");
       state.isAuthenticated = false;
       state.token = null;
+      state.role = null;
     },
   },
 });

@@ -13,7 +13,7 @@ function JobseekerBTN() {
       window.open(`${BASE_URL}/auth/github/callback`, "_self");
     }
 
-    navigate("/jobseekers/dashboard");
+    navigate("/jobseeker/dashboard");
   };
   return (
     <button
