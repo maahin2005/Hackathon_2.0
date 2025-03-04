@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Logo from "../Logo";
-// import Logo from "../Logo";
 import JobseekerBTN from "../../Custom/Buttons/JobseekerBTN";
+import { Link } from "react-router-dom";
 
 function NavJobseekers() {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,6 +13,18 @@ function NavJobseekers() {
 
         <div className="hidden md:flex space-x-8">
           <JobseekerBTN />
+          <Link
+            to="/about-us"
+            className="text-white hover:text-blue-500 cursor-pointer"
+          >
+            About us
+          </Link>
+          <Link
+            to="/contact-us"
+            className="text-white hover:text-blue-500 cursor-pointer"
+          >
+            Contact us
+          </Link>
           <a
             href={`${import.meta.env.VITE_BACKEND_URL}/auth/logout`}
             className="text-white "
@@ -32,6 +44,18 @@ function NavJobseekers() {
       {isOpen && (
         <div className="md:hidden flex flex-col bg-gray-900 text-white p-4 space-y-3 transition-all duration-700">
           <JobseekerBTN />
+          <Link
+            to="/about-us"
+            className="text-white hover:text-blue-500 cursor-pointer"
+          >
+            About us
+          </Link>
+          <Link
+            to="/contact-us"
+            className="text-white hover:text-blue-500 cursor-pointer"
+          >
+            Contact us
+          </Link>
           <a
             href={`${import.meta.env.VITE_BACKEND_URL}/auth/logout`}
             className="text-white "

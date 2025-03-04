@@ -14,7 +14,7 @@ const transporter = nodemailer.createTransport({
 });
 
 emailRoute.post("/send", async (req, res) => {
-  const { email, name, message } = req.body;
+  const { email, name, message, phone } = req.body;
   const ownerEmails = [
     "shibupandey0203@gmail.com",
     "amitkumar655921@gmail.com",
@@ -56,6 +56,9 @@ emailRoute.post("/send", async (req, res) => {
           <h2 style="color: #d9534f;">New Message Received from HireOrHired</h2>
           <p><strong>Name:</strong> ${name}</p>
           <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Phone:</strong> ${
+            phone ?? "Mobile Number not provided"
+          }</p>
           <p><strong>Message:</strong></p>
           <blockquote style="background: #f4f4f4; padding: 10px; border-left: 5px solid #d9534f;">${message}</blockquote>
           <p>Please review and respond promptly.</p>

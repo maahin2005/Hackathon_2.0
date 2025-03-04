@@ -9,11 +9,15 @@ import JobseekerDashboard from "./../Pages/jobseeker/Dashboard/JobseekerDashboar
 import TalentProfile from "./../Pages/recruiter/hireTalent/TalentProfile";
 import RecruiterDashboard from "./../Pages/recruiter/dashboard/RecruiterDashboard";
 import ProfileUdpateForm from "../Pages/jobseeker/ProfileUpdateForm";
+import AboutUs from "../Pages/About/About";
+import ContactPage from "../Pages/Contact/Contact";
 function Routings() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/about-us" element={<AboutUs />} />
+      <Route path="/contact-us" element={<ContactPage />} />
 
       <Route
         path="/jobseeker/dashboard"

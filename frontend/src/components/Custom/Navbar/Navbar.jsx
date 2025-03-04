@@ -17,6 +17,18 @@ const Navbar = () => {
         <div className="hidden md:flex space-x-8">
           <RecruiterBTN />
           <JobseekerBTN />
+          <Link
+            to="/about-us"
+            className="text-white hover:text-blue-500 cursor-pointer"
+          >
+            About us
+          </Link>
+          <Link
+            to="/contact-us"
+            className="text-white hover:text-blue-500 cursor-pointer"
+          >
+            Contact us
+          </Link>
         </div>
 
         {/* Mobile Menu Button */}
@@ -33,6 +45,18 @@ const Navbar = () => {
         <div className="md:hidden flex flex-col bg-gray-900 text-white p-4 space-y-3 transition-all duration-700">
           <RecruiterBTN />
           <JobseekerBTN />
+          <Link
+            to="/about-us"
+            className="text-white hover:text-blue-500 cursor-pointer"
+          >
+            About us
+          </Link>
+          <Link
+            to="/contact-us"
+            className="text-white hover:text-blue-500 cursor-pointer"
+          >
+            Contact us
+          </Link>
         </div>
       )}
     </nav>
