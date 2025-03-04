@@ -8,13 +8,13 @@ const FetchScore = ({ githubUsername }) => {
   const BASE_URL = import.meta.env.VITE_BACKEND_URL;
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
-
+  const userId = useSelector((state) => state.candidate._id);
   const [repos, setRepos] = useState([]);
   const [categories, setCategories] = useState([]);
   const [selectedRepo, setSelectedRepo] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [standardCommits, setStandardCommits] = useState("");
-
+  // categoryType == category.name == selectedCategory
   const fetchRepos = async () => {
     try {
       const response = await axios.get(
@@ -46,6 +46,21 @@ const FetchScore = ({ githubUsername }) => {
     }
   };
 
+  const storeScoreAndCategoryTypeToDB = async (score, categoryType) => {
+    try {
+      // API call
+      const res = await axios.patch(`${BASE_URL}/jobseekers/update-score`, {
+        userId,
+        score,
+        categoryType,
+      });
+
+      console.log("res.data", res.data);
+    } catch (error) {
+      console.log("error=> ", error.message);
+    }
+  };
+
   const generateMyScore = async () => {
     setLoading(true);
     try {
@@ -55,9 +70,9 @@ const FetchScore = ({ githubUsername }) => {
         standard_commits: standardCommits,
       });
       setLoading(false);
-      const score = parseFloat(
-        (res?.data?.final_similarity_score * 100).toFixed(2)
-      );
+      const score = Math.round(res?.data?.final_similarity_score * 100);
+      storeScoreAndCategoryTypeToDB(score, selectedCategory);
+
       dispatch(setScore(score));
     } catch (error) {
       setLoading(false);

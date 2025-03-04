@@ -13,6 +13,7 @@ const userSchema = new mongoose.Schema(
     githubId: { type: String, default: null },
     githubUsername: { type: String },
     topRepos: { type: [{ String }], default: [] },
+    categoryType: { type: String },
     score: { type: Number, default: 0 },
     role: {
       type: String,

@@ -1,9 +1,12 @@
 import UserModel from "../../models/User.js";
 
 export const updateJobseekerScores = async (req, res) => {
-  const { userId, score } = req.body;
+  const { userId, score, categoryType } = req.body;
   try {
-    const user = await UserModel.findByIdAndUpdate(userId, { score });
+    const user = await UserModel.findByIdAndUpdate(userId, {
+      score,
+      categoryType,
+    });
 
     if (!user) {
       return res.status(404).json({ message: "Jobseeker not found" });
