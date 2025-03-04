@@ -25,7 +25,7 @@ const HeroSection = () => {
 
   return (
     <div
-      className="w-full min-h-screen flex flex-col md:flex-row items-center justify-between text-white p-6 md:p-8 overflow-hidden"
+      className="w-full min-h-screen flex flex-col md:flex-row items-center justify-evenly text-white p-6 md:p-8 overflow-hidden"
       style={{
         backgroundImage: `url(${starsBackground})`,
         backgroundSize: "cover",
@@ -35,7 +35,7 @@ const HeroSection = () => {
       }}
     >
       {/* Left Section */}
-      <div className="w-full md:w-1/3 flex flex-col items-center gap-4 md:gap-6">
+      <div className="w-full md:w-1/3 flex flex-col items-center gap-4 md:gap-6 ">
         <h2 className="text-xl md:text-2xl font-bold text-center">
           Connecting Talent with Opportunity
         </h2>
@@ -71,7 +71,8 @@ const HeroSection = () => {
       </div>
 
       {/* Right Section */}
-      <div className="p-6 md:p-8 bg-gray-900/40 border border-gray-500/50 backdrop-blur-lg shadow-md w-full max-w-2xl min-h-[350px] flex flex-col items-center gap-4 justify-center text-center rounded-lg">
+      <div className="pt-4 pb-6 pl-6 pr-6 md:p-8 bg-gray-900/40 border border-gray-500/50 backdrop-blur-lg shadow-md w-full max-w-2xl min-h-[350px] flex flex-col items-center gap-4 justify-center text-center rounded-lg">
+
       {activeRole === "recruiter" ? (
           <div className="flex flex-col items-center gap-4 justify-center text-center rounded-lg">
             <h1 className="text-2xl md:text-4xl font-[Kanit] text-blue-400">
