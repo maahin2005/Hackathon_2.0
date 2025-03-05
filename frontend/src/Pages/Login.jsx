@@ -61,7 +61,7 @@ function Login() {
           <div className="flex justify-center mb-6">
             <button
               onClick={() => setActiveTab("Recruiter")}
-              className={`px-6 py-2 text-sm sm:text-lg font-medium border-b-4 transition w-1/2 ${
+              className={`cursor-pointer px-6 py-2 text-sm sm:text-lg font-medium border-b-4 transition w-1/2 ${
                 activeTab === "Recruiter"
                   ? "border-blue-500 text-blue-600"
                   : "border-transparent text-gray-500"
@@ -71,7 +71,7 @@ function Login() {
             </button>
             <button
               onClick={() => setActiveTab("Jobseeker")}
-              className={`px-6 py-2 text-sm sm:text-lg font-medium border-b-4 transition w-1/2 ${
+              className={`cursor-pointer px-6 py-2 text-sm sm:text-lg font-medium border-b-4 transition w-1/2 ${
                 activeTab === "Jobseeker"
                   ? "border-green-500 text-green-600"
                   : "border-transparent text-gray-500"
@@ -81,7 +81,7 @@ function Login() {
             </button>
           </div>
           <button
-            className={`w-full sm:w-3/4 px-6 my-5 py-3 rounded-full text-lg font-medium text-white transition ${
+            className={`cursor-pointer w-full sm:w-3/4 px-6 my-5 py-3 rounded-full text-lg font-medium text-white transition ${
               activeTab === "Recruiter"
                 ? "bg-blue-500 hover:bg-blue-600"
                 : "bg-green-500 hover:bg-green-600"
