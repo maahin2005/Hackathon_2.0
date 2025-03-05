@@ -13,7 +13,7 @@ const CandidateProfile = ({ isCandidate = false }) => {
   
 
   return (
-    <div className="relative my-20 max-w-5xl mx-auto p-8 bg-white shadow-lg rounded-2xl border border-gray-200">
+    <div className="relative my-20 max-w-5xl mx-auto p-8 bg-white-200 shadow-lg rounded-2xl border border-gray-200">
       {/* Header Section */}
       <Link to="/jobseeker/profile/edit">
         <FaEdit className="absolute top-3 right-3 text-3xl cursor-pointer" />
@@ -26,9 +26,10 @@ const CandidateProfile = ({ isCandidate = false }) => {
           className="w-32 h-32 rounded-full border-4 border-gray-200 shadow-md"
         />
         <div className="text-center sm:text-left">
-          <h1 className="text-4xl font-extrabold text-gray-900">
-            {candidate.name}
-          </h1>
+        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900">
+          {candidate.name}
+        </h1>
+
           <div className="flex flex-col sm:flex-row items-center gap-3 mt-2 text-gray-700">
             <a
               href={`mailto:${candidate.email}`}

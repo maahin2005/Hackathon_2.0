@@ -6,6 +6,7 @@ import {
   setUserData,
   setScore,
 } from "../../../redux/features/candidate/candidate";
+import Footer from "../../../components/Custom/Footer/Footer";
 
 function JobseekerDashboard() {
   const BASE_URL = import.meta.env.VITE_BACKEND_URL;
@@ -71,6 +72,7 @@ function JobseekerDashboard() {
       ) : (
         <CandidateProfile isCandidate={true} />
       )}
+      <Footer/>
     </div>
   );
 }
