@@ -8,8 +8,8 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className=" fixed top-0 left-0 w-full  z-50 bg-gradient-to-b from-black to-gray-900 p-4 transition-all duration-700">
-      <div className="px-20 container mx-auto flex justify-between items-center">
+    <nav className=" fixed top-0 left-0 w-full  z-50 bg-black p-4 border-b-1 border-gray-200 ">
+      <div className="px-4 container mx-auto flex justify-between items-center ">
         {/* Logo */}
         <Logo />
 
@@ -34,7 +34,7 @@ const Navbar = () => {
         {/* Mobile Menu Button */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden text-white focus:outline-none text-2xl"
+          className="md:hidden text-white focus:outline-none text-2xl "
         >
           ☰
         </button>
@@ -42,8 +42,10 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden flex flex-col bg-gray-900 text-white p-4 space-y-3 transition-all duration-700">
-          <RecruiterBTN />
+        <div className="md:hidden flex flex-col items-center justify-center 
+    bg-transparent backdrop-blur-lg backdrop-brightness-125 text-white 
+    p-6 space-y-4 rounded-lg shadow-xl transition-all duration-700 border-3 border-gray-400">
+        <RecruiterBTN />
           <JobseekerBTN />
           <Link
             to="/about-us"

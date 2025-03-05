@@ -12,11 +12,11 @@ function NavRecruiters() {
         <Logo />
 
         {/* Menu Items (Desktop) */}
-        <div className="hidden md:flex space-x-8">
+        <div className="hidden md:flex space-x-8 cursor-pointer">
           <RecruiterBTN />
           <a
             href={`${import.meta.env.VITE_BACKEND_URL}/auth/logout`}
-            className="text-white "
+            className="text-white  cursor-pointer"
           >
             Logout
           </a>
@@ -25,7 +25,7 @@ function NavRecruiters() {
         {/* Mobile Menu Button */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden text-white focus:outline-none text-2xl"
+          className="md:hidden text-white focus:outline-none text-2xl cursor-pointer"
         >
           ☰
         </button>
@@ -33,7 +33,9 @@ function NavRecruiters() {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden flex flex-col bg-gray-900 text-white p-4 space-y-3 transition-all duration-700">
+        <div className="md:hidden flex flex-col items-center justify-center 
+    bg-transparent backdrop-blur-lg backdrop-brightness-125 text-white 
+    p-6 space-y-4 rounded-lg shadow-xl transition-all duration-700 border-3 border-gray-400">
           <RecruiterBTN />
           <a
             href={`${import.meta.env.VITE_BACKEND_URL}/auth/logout`}

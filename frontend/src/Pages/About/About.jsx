@@ -1,103 +1,109 @@
-import React, { useEffect } from "react";
-import { FaGithub, FaLinkedin, FaExternalLinkAlt } from "react-icons/fa";
-import Navbar from "../../components/Custom/Navbar/Navbar";
-import Footer from "../../components/Custom/Footer/Footer";
+import React, { useState } from "react";
+import Navbar from "../../components/Custom/Navbar/Navbar.jsx";
+import { useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
+import Footer from '../../components/Custom/Footer/Footer.jsx';
 
-const AboutUs = () => {
-  useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: "smooth",
-    });
-  }, []);
+function Login() {
+  const params = new URLSearchParams(window.location.search);
+  const error = params.get("error");
+  const [activeTab, setActiveTab] = useState("Recruiter");
+  const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
+  if (error) {
+    try {
+      alert(decodeURIComponent(error));
+    } catch (e) {
+      console.log("No any decoding URI:", e);
+    }
+  }
+
+  const handleGithubLogin = () => {
+    if (!isAuthenticated) {
+      window.open(`${BASE_URL}/auth/github/callback`, "_self");
+    }
+  };
+
+  const handleGoogleLogin = () => {
+    if (!isAuthenticated) {
+      window.location.href = `${BASE_URL}/auth/google`;
+    }
+  };
+
+  const handleLogin = (activatedTab) => {
+    if (activatedTab === "Recruiter") {
+      handleGoogleLogin();
+    }
+    if (activatedTab === "Jobseeker") {
+      handleGithubLogin();
+    }
+  };
+
+  const { isAuthenticated, role } = useSelector((state) => state.auth);
+
+  if (isAuthenticated) {
+    if (role === "recruiter") {
+      return <Navigate to="/recruiter/dashboard" />;
+    }
+    if (role === "jobseeker") {
+      return <Navigate to="/jobseeker/dashboard" />;
+    }
+  }
+
   return (
     <>
       <Navbar />
-      <div className="py-20 min-h-screen h-[800px] flex flex-col items-center justify-center p-8 text-center">
-        <div className="text-center w-full py-8 ">
-          <h1 className="font-[Kanit] text-8xl font-bold mb-8 bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
-            About Us
-          </h1>
-          <p className="text-xl font-medium w-3/4 m-auto text-gray-500 mb-12 leading-relaxed">
-            We are a passionate team dedicated to revolutionizing the hiring
-            process using cutting-edge technology. Our platform leverages
-            AI-driven search and seamless integration to connect recruiters with
-            top talent efficiently.
-          </p>
+      <div className="min-h-screen flex flex-col bg-gray-100">
+        {/* Main Content */}
+        <div className="flex-grow flex flex-col items-center justify-center px-4 sm:px-6">
+          <div className="bg-white p-6 py-10 h-auto rounded-xl shadow-lg text-center w-full max-w-lg">
+            <h1 className="text-2xl sm:text-3xl font-semibold mb-6">
+              Login As {activeTab}
+            </h1>
 
-          <h2 className="text-5xl font-[Kanit] font-bold mb-12 bg-gradient-to-r from-blue-500 to-blue-300 bg-clip-text text-transparent">
-            Meet Our Team
-          </h2>
+            <p className="text-gray-500">Shivani Pandey Tester</p> {/* ✅ Added */}
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-3/4 m-auto">
-            {teamMembers.map(({ name, role, website, github, linkedin }) => (
-              <div
-                key={name}
-                className="p-8 backdrop-blur-lg rounded-2xl shadow-2xl transition-transform transform hover:scale-105 hover:shadow-3xl bg-gradient-to-br from-gray-700 via-gray-800 to-gray-900 border border-white border-opacity-10"
+            <div className="flex justify-center mb-6">
+              <button
+                onClick={() => setActiveTab("Recruiter")}
+                className={`px-6 py-2 text-sm sm:text-lg font-medium border-b-4 transition w-1/2 ${
+                  activeTab === "Recruiter"
+                    ? "border-blue-500 text-blue-600"
+                    : "border-transparent text-gray-500"
+                }`}
               >
-                <div className="flex flex-col items-center justify-center">
-                  <h3 className="text-2xl font-bold text-white mb-2">{name}</h3>
-                  <p className="text-gray-300 text-sm mb-4">{role}</p>
-                  <div className="flex space-x-6 mt-4">
-                    <a
-                      href={linkedin}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-blue-400 hover:text-blue-300 transition-colors duration-300"
-                    >
-                      <FaLinkedin className="text-2xl" />
-                    </a>
-                    <a
-                      href={github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-gray-400 hover:text-gray-300 transition-colors duration-300"
-                    >
-                      <FaGithub className="text-2xl" />
-                    </a>
-                    <a
-                      href={website}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-blue-400 hover:text-blue-300 transition-colors duration-300"
-                    >
-                      <FaExternalLinkAlt className="text-2xl" />
-                    </a>
-                  </div>
-                </div>
-              </div>
-            ))}
+                Recruiter Developer {/* ✅ Updated */}
+              </button>
+              <button
+                onClick={() => setActiveTab("Jobseeker")}
+                className={`px-6 py-2 text-sm sm:text-lg font-medium border-b-4 transition w-1/2 ${
+                  activeTab === "Jobseeker"
+                    ? "border-green-500 text-green-600"
+                    : "border-transparent text-gray-500"
+                }`}
+              >
+                Jobseeker Developer {/* ✅ Updated */}
+              </button>
+            </div>
+
+            <button
+              className={`w-full sm:w-3/4 px-6 my-5 py-3 rounded-full text-lg font-medium text-white transition ${
+                activeTab === "Recruiter"
+                  ? "bg-blue-500 hover:bg-blue-600"
+                  : "bg-green-500 hover:bg-green-600"
+              }`}
+              onClick={() => handleLogin(activeTab)}
+            >
+              Continue as {activeTab} Developer {/* ✅ Updated */}
+            </button>
           </div>
         </div>
+        
+        {/* Footer - Stays at Bottom */}
+        <Footer />
       </div>
-      <Footer />
     </>
   );
-};
+}
 
-const teamMembers = [
-  {
-    name: "Mahin",
-    role: "API Integration & Full Stack",
-    website: "https://mahin.vercel.app/",
-    github: "https://github.com/maahin2005",
-    linkedin: "https://www.linkedin.com/in/mahin1112/",
-  },
-  {
-    name: "Amit Kumar Murmu",
-    role: "Backend & Performance Optimization",
-    website: "https://akmurmudeveloper.vercel.app/",
-    github: "https://github.com/akmurmu82",
-    linkedin: "https://www.linkedin.com/in/amit-kumar-murmu82/",
-  },
-  {
-    name: "Shivani Pandey",
-    role: "UI/UX Design & Frontend",
-    website: "https://shivanipandey-protfolio.netlify.app/",
-    github: "https://github.com/shivanipandey5678",
-    linkedin: "https://www.linkedin.com/in/shivani-pandey-029600288/",
-  },
-];
-
-export default AboutUs;
+export default Login;
