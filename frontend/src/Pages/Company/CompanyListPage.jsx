@@ -1,6 +1,8 @@
-import CompanyCard from '../Recruiter/CompanyCard'
-import CompanyFilterNavbar from './companyfilterheader';
-import Footer from '../Custom/Footer/Footer';
+import CompanyCard from '../../components/Recruiter/CompanyCard';
+import CompanyFilterNavbar from '../../components/Recruiter/companyfilterheader';
+import Footer from '../../components/Custom/Footer/Footer';
+import NavJobseekers from '../../components/Custom/Auth/NavJobseekers';
+import NavRecruiters from '../../components/Custom/Auth/NavRecruiters';
 const companies = [
     {
       id: "COMP001",
@@ -45,8 +47,9 @@ const companies = [
 const CompanyList = () => {
     return (
         <>
+            <NavJobseekers/>
             <CompanyFilterNavbar/>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6 my-18">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6 my-18 justify-center place-items-center">
                 {companies.map((company) => (
                 <CompanyCard key={company.id} company={company} />
                 ))}

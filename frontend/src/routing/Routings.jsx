@@ -8,9 +8,12 @@ import HireTalents from "./../Pages/recruiter/hireTalent/HireTalents";
 import JobseekerDashboard from "./../Pages/jobseeker/Dashboard/JobseekerDashboard";
 import TalentProfile from "./../Pages/recruiter/hireTalent/TalentProfile";
 import RecruiterDashboard from "./../Pages/recruiter/dashboard/RecruiterDashboard";
-import ProfileUdpateForm from "../Pages/jobseeker/ProfileUpdateForm";
-import AboutUs from '../Pages/About/About.jsx'
+import ProfileUpdateForm from "../Pages/jobseeker/ProfileUpdateForm";
+import AboutUs from '../Pages/About/About.jsx';
 import ContactPage from "../Pages/Contact/Contact";
+import CompanyListPage from '../Pages/Company/CompanyListPage.jsx';
+import CompanyDetailPage from "../Pages/Company/CompanyDetailPage .jsx";
+
 function Routings() {
   return (
     <Routes>
@@ -31,7 +34,7 @@ function Routings() {
         path="/jobseeker/profile/edit"
         element={
           <ProtectedJobseekerRoutes>
-            <ProfileUdpateForm />
+            <ProfileUpdateForm />
           </ProtectedJobseekerRoutes>
         }
       />
@@ -56,6 +59,15 @@ function Routings() {
         element={
           <ProtectedRecruiterRoutes>
             <HireTalents />
+          </ProtectedRecruiterRoutes>
+        }
+      />
+      <Route path="/companies" element={<CompanyListPage />} />
+      <Route
+        path="/company/dashboard"
+        element={
+          <ProtectedRecruiterRoutes>
+            < CompanyDetailPage/>
           </ProtectedRecruiterRoutes>
         }
       />

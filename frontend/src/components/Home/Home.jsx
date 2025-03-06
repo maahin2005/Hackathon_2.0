@@ -8,7 +8,7 @@ import JobSeekerSection from "./JobSeekerSection/JobSeekerSection";
 import RecruiterSection from "./RecruiterSection/RecruiterSection";
 import Navbar from "./../Custom/Navbar/Navbar";
 import CompanyFilterNavbar from "../Recruiter/companyfilterheader";
-import CompanyDetailPage from "../../Pages/Company/CompanyDetailpage";
+import CompanyDetailPage from "../../Pages/Company/CompanyDetailPage ";
 function Home() {
   useEffect(() => {
     AOS.init({ duration: 1000 }); // Initialize AOS with animation duration
