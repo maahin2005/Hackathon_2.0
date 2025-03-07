@@ -1,9 +1,7 @@
-import { useSelector } from "react-redux";
-import { FaGlobe, FaMapMarkerAlt, FaPhone, FaEnvelope, FaBuilding } from "react-icons/fa";
+import PropTypes from "prop-types";
+import { FaGlobe, FaMapMarkerAlt, FaPhone, FaEnvelope } from "react-icons/fa";
 
 const CompanyProfile = ({ company }) => {
-  //   const company = useSelector((state) => state.company); // Fetch company details from Redux store
-
   if (!company) return null;
   console.log("Company data:", company);
 
@@ -17,8 +15,7 @@ const CompanyProfile = ({ company }) => {
     employees,
     revenue,
     isPublic,
-    tags,
-    registeredBy
+    tags
   } = company;
 
   return (
@@ -98,6 +95,32 @@ const CompanyProfile = ({ company }) => {
       )}
     </div>
   );
+};
+
+// PropTypes validation
+CompanyProfile.propTypes = {
+  company: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    companyProfile: PropTypes.string,
+    industry: PropTypes.string.isRequired,
+    foundedYear: PropTypes.number,
+    employees: PropTypes.number,
+    revenue: PropTypes.number,
+    isPublic: PropTypes.bool,
+    tags: PropTypes.arrayOf(PropTypes.string),
+    address: PropTypes.shape({
+      street: PropTypes.string,
+      city: PropTypes.string,
+      state: PropTypes.string,
+      country: PropTypes.string,
+      postalCode: PropTypes.string,
+    }),
+    contact: PropTypes.shape({
+      phone: PropTypes.string,
+      email: PropTypes.string,
+      website: PropTypes.string,
+    }),
+  }).isRequired,
 };
 
 export default CompanyProfile;

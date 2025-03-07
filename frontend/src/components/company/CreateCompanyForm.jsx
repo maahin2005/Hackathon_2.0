@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useState } from "react";
 import { addCompany, fetchCompany } from "../../redux/features/company/companySlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -184,5 +185,10 @@ const CompanyForm = ({ setVisibility }) => {
         </div>
     );
 };
+
+// PropTypes validation
+CompanyForm.propTypes = {
+    setVisibility: PropTypes.func.isRequired,
+}
 
 export default CompanyForm;
