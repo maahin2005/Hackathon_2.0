@@ -6,6 +6,11 @@ const companySchema = new mongoose.Schema({
     // required: true,
     description: "The name of the company",
   },
+  companyProfile: {
+    type: String,
+    // required: true,
+    default: "https://cdn4.vectorstock.com/i/1000x1000/09/33/company-icon-for-graphic-and-web-design-vector-31970933.jpg",
+  },
   address: {
     street: {
       type: String,

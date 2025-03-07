@@ -5,7 +5,7 @@ const verifyRecruiter = (req, res, next) => {
 
   return res
     .status(403)
-    .json({ message: "Unauthorized - You are not allowed to access this." });
+    .json({ message: "Unauthorized - You are not a recruiter, you are not allowed to access this." });
 };
 
 export default verifyRecruiter;
