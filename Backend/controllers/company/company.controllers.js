@@ -15,11 +15,29 @@ export const getAllCompanies = async (req, res) => {
   }
 };
 
+// Get recruiters' company
+export const getRecruitersCompany = async (req, res) => {
+  try {
+    // const company = await CompanyModel.findById(req.params.id);
+    const company = await CompanyModel.find({ registeredBy: req.params.recruiterId });
+    if (!company) {
+      return res.status(404).json({ message: "Company not found" });
+    }
+    res.status(200).json({
+      success: true,
+      data: company,
+      message: "Company data found successfully",
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
 // Get a single company by ID
 export const getCompanyById = async (req, res) => {
   try {
-    // const company = await CompanyModel.findById(req.params.id);
-    const company = await CompanyModel.find({ registeredBy: req.params.id });
+    const company = await CompanyModel.findById(req.params.id);
+    // const company = await CompanyModel.find({ registeredBy: req.params.id });
     if (!company) {
       return res.status(404).json({ message: "Company not found" });
     }
@@ -63,7 +81,7 @@ export const createCompany = async (req, res) => {
     // Send success response
     res
       .status(201)
-      .json({ success: true, message: "Company saved successfully" });
+      .json({ success: true, message: "Company saved successfully", data: newCompany });
   } catch (error) {
     // Handle errors
     res.status(400).json({ success: false, message: error.message });

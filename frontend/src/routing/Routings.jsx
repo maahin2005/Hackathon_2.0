@@ -11,6 +11,7 @@ import RecruiterDashboard from "./../Pages/recruiter/dashboard/RecruiterDashboar
 import ProfileUdpateForm from "../Pages/jobseeker/ProfileUpdateForm";
 import AboutUs from "../Pages/About/About";
 import ContactPage from "../Pages/Contact/Contact";
+import RecruiterPage from "../Pages/recruiter/RecruiterPage/RecruiterPage";
 function Routings() {
   return (
     <Routes>
@@ -24,6 +25,14 @@ function Routings() {
         element={
           <ProtectedJobseekerRoutes>
             <JobseekerDashboard />
+          </ProtectedJobseekerRoutes>
+        }
+      />
+      <Route
+        path="/jobseeker/companies"
+        element={
+          <ProtectedJobseekerRoutes>
+            <RecruiterPage />
           </ProtectedJobseekerRoutes>
         }
       />

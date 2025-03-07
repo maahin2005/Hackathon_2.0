@@ -7,7 +7,7 @@ const token = Cookies.get("token");
 const decoded = decodeToken(token);
 
 const checkAuth = () => {
-  return !!token; // Rrofieturns true if token exists, false otherwise
+  return !!token; // Returns true if token exists, false otherwise
 };
 
 const initialState = {

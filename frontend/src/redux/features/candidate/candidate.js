@@ -4,7 +4,7 @@ const initialState = {
   _id: "",
   name: "",
   email: "",
-  profileImage: "",
+  profileImage: null,
   bio: "",
   experienceInYear: 0,
   heading: "",

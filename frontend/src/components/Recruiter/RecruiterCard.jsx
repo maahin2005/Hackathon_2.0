@@ -7,7 +7,7 @@ const recruiter = {
   company: "Tech Solutions Ltd.",
   email: "amit.sharma@techsolutions.com",
   phone: "+91 98765 43210",
-  avatar: "https://randomuser.me/api/portraits/men/45.jpg",
+  avatar: "https://cdn4.vectorstock.com/i/1000x1000/09/33/company-icon-for-graphic-and-web-design-vector-31970933.jpg",
   active: true,
   location:"delhi"
 };
