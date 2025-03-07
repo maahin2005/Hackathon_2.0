@@ -11,9 +11,9 @@ function JobseekerBTN() {
   const handleGithubLogin = () => {
     if (!isAuthenticated) {
       window.open(`${BASE_URL}/auth/github/callback`, "_self");
+    } else {
+      navigate("/jobseeker/dashboard");
     }
-
-    navigate("/jobseeker/dashboard");
   };
   return (
     <button

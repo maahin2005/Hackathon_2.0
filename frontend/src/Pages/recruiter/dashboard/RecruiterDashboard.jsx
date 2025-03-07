@@ -5,6 +5,7 @@ import { setUserData } from "../../../redux/features/candidate/candidate";
 import CompanyProfile from "../../../components/company/CompanyProfile";
 import { fetchCompany } from "../../../redux/features/company/companySlice";
 import CompanyForm from "../../../components/company/CreateCompanyForm";
+import Footer from "../../../components/Custom/Footer/Footer";
 
 function RecruiterDashboard() {
   const BASE_URL = import.meta.env.VITE_BACKEND_URL;
@@ -76,12 +77,10 @@ function RecruiterDashboard() {
           ))}
         </div>
 
-        {/* Bio */}
-        <div className="px-8 py-6 text-center text-gray-700">
-          {recruiter.name} is a seasoned recruiter with over {recruiter.experienceInYear} years of experience specializing in tech recruitment.
-        </div>
-
-
+          {/* Bio */}
+          <div className="px-8 py-6 text-center text-gray-700">
+            {recruiter.name} is a seasoned recruiter with over {recruiter.experienceInYear} years of experience specializing in tech recruitment.
+          </div>
 
         {/* Company List */}
         <div className="px-8 py-4">
@@ -109,6 +108,9 @@ function RecruiterDashboard() {
           )}
         </div>
       </div>
+
+      {/* Footer at Bottom */}
+      <Footer />
     </div>
   );
 }

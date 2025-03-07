@@ -114,39 +114,38 @@ function CandidateGithubData({ githubUsername }) {
 
       <div className="mt-6">
         <h3 className="text-lg font-bold">Top Repositories</h3>
-        <div className="my-3 grid md:grid-cols-2 gap-3">
-          {githubData?.topRepos.length === 0 && "--"}
-          {githubData?.topRepos.map((repo, index) => (
-            <div
-              key={index}
-              className="p-6 my-3 rounded-xl shadow-md bg-white hover:shadow-2xl transition-all transform hover:-translate-y-1 hover:scale-105 duration-300"
-            >
-              <h3 className="text-xl font-semibold text-gray-900 flex items-center gap-2">
-                <span className="truncate">{repo.name}</span>
-                {repo.fork && (
-                  <span className="text-sm text-gray-500">(Forked)</span>
-                )}
-              </h3>
-              <p className="text-gray-600 mt-2 text-sm line-clamp-3">
-                {repo.description || "No description available"}
-              </p>
-              <div className="mt-4 flex items-center justify-between">
-                <a
-                  href={repo.html_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-600 hover:text-blue-800 font-semibold transition-colors"
-                >
-                  View Repository →
-                </a>
-                <div className="flex items-center gap-2 text-gray-500 text-sm">
-                  <span>⭐ {repo.stargazers_count}</span>
-                  <span>🔀 {repo.forks_count}</span>
-                </div>
-              </div>
-            </div>
-          ))}
+        <div className="my-3 grid grid-cols-1 sm:grid-cols-2 gap-3">
+  {githubData?.topRepos.length === 0 && "--"}
+  {githubData?.topRepos.map((repo, index) => (
+    <div
+      key={index}
+      className="p-6 my-3 rounded-xl shadow-md hover:shadow-2xl transition-all transform hover:-translate-y-1 hover:scale-105 duration-300"
+    >
+      <h3 className="text-lg sm:text-xl font-semibold text-gray-900 flex items-center gap-2">
+        <span className="truncate w-full">{repo.name}</span>
+        {repo.fork && <span className="text-sm text-gray-500">(Forked)</span>}
+      </h3>
+      <p className="text-gray-600 mt-2 text-sm line-clamp-3 break-words">
+        {repo.description || "No description available"}
+      </p>
+      <div className="mt-4 flex flex-wrap items-center justify-between">
+        <a
+          href={repo.html_url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-600 hover:text-blue-800 font-semibold transition-colors"
+        >
+          View Repository →
+        </a>
+        <div className="flex items-center gap-2 text-gray-500 text-sm">
+          <span>⭐ {repo.stargazers_count}</span>
+          <span>🔀 {repo.forks_count}</span>
         </div>
+      </div>
+    </div>
+  ))}
+</div>
+
       </div>
     </div>
   );

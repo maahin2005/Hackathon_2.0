@@ -16,7 +16,7 @@ const AboutUs = () => {
       <Navbar />
       <div className="py-20 min-h-screen h-[800px] flex flex-col items-center justify-center p-8 text-center">
         <div className="text-center w-full py-8 ">
-          <h1 className="font-[Kanit] text-8xl font-bold mb-8 bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
+          <h1 className="font-[Kanit] text-7xl font-bold mb-8 bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
             About Us
           </h1>
           <p className="text-xl font-medium w-3/4 m-auto text-gray-500 mb-12 leading-relaxed">

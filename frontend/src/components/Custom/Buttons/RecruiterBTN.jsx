@@ -12,8 +12,9 @@ function RecruiterBTN() {
   const handleGoogleLogin = () => {
     if (!isAuthenticated) {
       window.location.href = `${BASE_URL}/auth/google`;
+    } else {
+      navigate("/recruiter/dashboard");
     }
-    navigate("/recruiter/dashboard");
   };
   return (
     <button

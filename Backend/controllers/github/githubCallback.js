@@ -5,7 +5,7 @@ dotenv.config();
 const githubCallback = (req, res) => {
   if (!req.user?.githubId) {
     return res.redirect(
-      "http://localhost:5173/login?error=user%20already%20existed%20as%20recruiter%20try%20with%20google"
+      `${process.env.CORS_ORIGIN}/login?error=user%20already%20existed%20as%20recruiter%20try%20with%20google`
     );
   }
   const token = jwt.sign(
@@ -24,7 +24,7 @@ const githubCallback = (req, res) => {
     maxAge: 7 * 24 * 60 * 60 * 1000, // 7 day
   });
 
-  res.redirect("http://localhost:5173/jobseeker/dashboard");
+  res.redirect(`${process.env.CORS_ORIGIN}/jobseeker/dashboard`);
   // return res.json({ success: true, message: "User Signin Successfully" });
 };
 

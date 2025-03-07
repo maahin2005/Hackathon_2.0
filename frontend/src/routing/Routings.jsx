@@ -9,7 +9,7 @@ import JobseekerDashboard from "./../Pages/jobseeker/Dashboard/JobseekerDashboar
 import TalentProfile from "./../Pages/recruiter/hireTalent/TalentProfile";
 import RecruiterDashboard from "./../Pages/recruiter/dashboard/RecruiterDashboard";
 import ProfileUdpateForm from "../Pages/jobseeker/ProfileUpdateForm";
-import AboutUs from "../Pages/About/About";
+import AboutUs from '../Pages/About/About.jsx'
 import ContactPage from "../Pages/Contact/Contact";
 import RecruiterPage from "../Pages/recruiter/RecruiterPage/RecruiterPage";
 function Routings() {
